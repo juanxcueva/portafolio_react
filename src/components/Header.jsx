@@ -1,12 +1,11 @@
-// src/components/Header.jsx (Opción 1: Con Botones de Ventana)
+// src/components/Header.jsx - CON ANALYTICS
 import React from 'react';
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa'; 
+import perfilImg from '../assets/perfil.JPG'; // ✅ Importa la imagen
+import { logSocialClick } from '../utils/analytics'; // ✅ Analytics
 import './Header.css';
-import perfilImg from '../assets/perfil.JPG';
-
 
 const Header = () => {
-  // El código se define como JSX para aplicar el resaltado de sintaxis
   const codeBlock = (
     <pre className="static-code">
       <span className="keyword">const</span> <span className="variable">developer</span> = <span className="brace">{'{'}</span>
@@ -22,12 +21,17 @@ const Header = () => {
     </pre>
   );
 
+  // ✅ Función para manejar clicks en redes sociales
+  const handleSocialClick = (platform, url) => {
+    logSocialClick(platform); // 📊 Registrar en Analytics
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <header className="header">
       <div className="left-section">
         <div className="profile">
           <img src={perfilImg} alt="Juan Cueva" className="header-img" />
-
           <h1>Juan Cueva</h1>
           <p className="title">
             Desarrollador FrontEnd | React | Flutter | Backend | Node.js | Spring
@@ -36,15 +40,28 @@ const Header = () => {
             Apasionado por el desarrollo de software, siempre aprendiendo nuevas tecnologías. ¡Listo para nuevos desafíos!
           </p>
           <div className="social-links">
-            <a href="https://www.linkedin.com/in/juanxcueva/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            {/* ✅ Clicks rastreados */}
+            <button
+              onClick={() => handleSocialClick('LinkedIn', 'https://www.linkedin.com/in/juanxcueva/')}
+              aria-label="LinkedIn"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
               <FaLinkedin size={24} />
-            </a>
-            <a href="https://github.com/juanxcueva" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            </button>
+            <button
+              onClick={() => handleSocialClick('GitHub', 'https://github.com/juanxcueva')}
+              aria-label="GitHub"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
               <FaGithub size={24} />
-            </a>
-            <a href="https://www.instagram.com/juanxcueva/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            </button>
+            <button
+              onClick={() => handleSocialClick('Instagram', 'https://www.instagram.com/juanxcueva/')}
+              aria-label="Instagram"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
               <FaInstagram size={24} />
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -52,7 +69,7 @@ const Header = () => {
       <div className="right-section">
         <div className="code-card">
           <div className="window-buttons">
-            <div className="dot"></div>
+            <div className="dot red"></div>
             <div className="dot yellow"></div>
             <div className="dot green"></div>
           </div>

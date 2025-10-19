@@ -3,11 +3,73 @@
 <head>
   <meta charset="UTF-8">
   
-  <!-- ✅ AGREGA ESTO - Previene zoom automático -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <!-- ✅ META VIEWPORT CORREGIDO PARA iPHONE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
   
-  <title>Juan Cueva - Desarrollador Fullstack</title>
+  <!-- Prevenir zoom automático en inputs (Safari iOS) -->
+  <meta name="format-detection" content="telephone=no">
+  
+  <!-- SEO Básico -->
+  <title>Juan Cueva - Desarrollador Fullstack | React, Flutter, Node.js</title>
+  <meta name="description" content="Portafolio profesional de Juan Cueva, desarrollador fullstack con 4+ años de experiencia en React, Flutter, Node.js y Spring Boot.">
+  <meta name="keywords" content="desarrollador fullstack, react, flutter, nodejs, portafolio, juan cueva">
+  <meta name="author" content="Juan Cueva">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tuportafolio.com/">
+  <meta property="og:title" content="Juan Cueva - Desarrollador Fullstack">
+  <meta property="og:description" content="Portafolio profesional con proyectos de desarrollo web y móvil">
+  <meta property="og:image" content="https://juanxcueva-portafolio.vercel.app/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://tuportafolio.com/">
+  <meta property="twitter:title" content="Juan Cueva - Desarrollador Fullstack">
+  <meta property="twitter:description" content="Portafolio profesional con proyectos de desarrollo web y móvil">
+  <meta property="twitter:image" content="https://juanxcueva-portafolio.vercel.app/og-image.jpg">
+  
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/vite.svg">
+  
+  <!-- ✅ ESTILOS INLINE PARA PREVENIR ZOOM EN iPHONE -->
+  <style>
+    * {
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body {
+      position: relative;
+      min-height: 100vh;
+    }
+    
+    /* Prevenir zoom en inputs (Safari iOS) */
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    
+    /* Eliminar highlight tap en iOS */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
 </head>
 <body>
   <div id="root"></div>

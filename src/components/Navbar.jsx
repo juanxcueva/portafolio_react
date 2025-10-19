@@ -1,5 +1,6 @@
-// src/components/Navbar.jsx (CON FUNCIONALIDAD COMPLETA)
+// src/components/Navbar.jsx - CON ANALYTICS
 import React, { useState, useEffect } from 'react';
+import { logNavClick } from '../utils/analytics'; // ✅ Analytics
 import './Navbar.css';
 
 const Navbar = () => {
@@ -7,7 +8,6 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('');
 
-    // Detectar scroll para cambiar el estilo del navbar
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
@@ -17,10 +17,12 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Smooth scroll y cierre del menú móvil
     const handleClick = (e, targetId) => {
         e.preventDefault();
         setIsOpen(false);
+        
+        // ✅ Registrar click en navegación
+        logNavClick(targetId);
         
         const element = document.getElementById(targetId);
         if (element) {
@@ -106,7 +108,6 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* Overlay para cerrar el menú en móvil */}
             <div 
                 className={`nav-overlay ${isOpen ? 'active' : ''}`}
                 onClick={() => setIsOpen(false)}
