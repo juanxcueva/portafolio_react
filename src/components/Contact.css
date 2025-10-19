@@ -1,47 +1,81 @@
-/* src/components/Contact.css */
+/* src/components/Contact.css (MEJORADO CON ANIMACIONES) */
 
 :root {
-    /* Reusamos las variables de color */
     --bg-primary: #121212; 
-    --bg-secondary: #1e1e1e; /* Fondo de las tarjetas */
+    --bg-secondary: #1e1e1e;
     --text-color: #e0e0e0;
     --text-light: #a0a0a0; 
-    --accent-color: #00C4FF; /* Color Flutter/Cyan */
+    --accent-color: #00C4FF;
+    --accent-secondary: #00E5FF;
     --shadow-dark: rgba(0, 0, 0, 0.7);
     --border-color: rgba(255, 255, 255, 0.1); 
-    --input-bg: #2a2a2a; /* Fondo de inputs más claro que la tarjeta */
+    --input-bg: #2a2a2a;
 }
 
 .contact-section {
-    background-color: var(--bg-primary);
+    background: linear-gradient(180deg, #0a0a0a 0%, var(--bg-primary) 100%);
     color: var(--text-color);
     padding: 80px 20px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de ondas en el fondo */
+.contact-section::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(0,196,255,0.03) 2px, transparent 2px);
+    background-size: 60px 60px;
+    animation: waveMove 15s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes waveMove {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(50px, 50px) rotate(360deg); }
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-main-title {
     font-size: 3rem;
     color: #fff;
     margin-bottom: 60px;
+    text-shadow: 0 2px 20px rgba(0,196,255,0.3);
+    animation: fadeInDown 0.8s ease-out;
 }
 
-/* Línea decorativa bajo el título principal (Consistente con About) */
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
 .contact-main-title::after {
     content: '';
     display: block;
     width: 60px;
     height: 3px;
-    background-color: var(--accent-color);
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
     margin: 10px auto 0;
     border-radius: 2px;
+    animation: expandLine 0.8s ease-out 0.3s backwards;
 }
 
-/* 🚨 ESTRUCTURA DE CONTENIDO (DOS COLUMNAS) 🚨 */
+@keyframes expandLine {
+    0% { width: 0; opacity: 0; }
+    100% { width: 60px; opacity: 1; }
+}
+
 .contact-grid {
     display: flex;
     gap: 40px;
@@ -49,38 +83,123 @@
     align-items: stretch;
 }
 
-/* --- ESTILO DE LAS TARJETAS --- */
 .card {
-    background-color: var(--bg-secondary);
-    border-radius: 16px;
-    box-shadow: 0 8px 20px var(--shadow-dark);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(30, 30, 30, 0.8) 100%);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px var(--shadow-dark), 0 0 0 1px rgba(0,196,255,0.1);
     padding: 40px;
     flex: 1; 
     min-width: 400px; 
     text-align: left;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: fadeInUp 0.8s ease-out backwards;
+}
+
+.contact-info-card {
+    animation-delay: 0.2s;
+}
+
+.contact-form-card {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px var(--shadow-dark), 0 0 0 1px rgba(0,196,255,0.3);
+}
+
+/* Brillo giratorio en hover */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(0,196,255,0.1), transparent 30%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.card:hover::before {
+    opacity: 1;
+    animation: rotateGlow 3s linear infinite;
+}
+
+@keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* --- Columna 1: Info de Contacto --- */
 .contact-info-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-around; /* Espacia uniformemente los ítems */
+    justify-content: space-around;
     text-align: center;
 }
 
 .info-item {
     margin: 15px 0;
+    padding: 15px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: slideInLeft 0.6s ease-out backwards;
+}
+
+.info-item:nth-child(1) { animation-delay: 0.6s; }
+.info-item:nth-child(2) { animation-delay: 0.7s; }
+.info-item:nth-child(3) { animation-delay: 0.8s; }
+.info-item:nth-child(4) { animation-delay: 0.9s; }
+.info-item:nth-child(5) { animation-delay: 1s; }
+
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-30px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.info-item:hover {
+    background: rgba(0,196,255,0.05);
+    transform: translateX(5px);
 }
 
 .info-icon {
     color: var(--accent-color);
     margin-bottom: 10px;
+    transition: all 0.3s ease;
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.info-item:hover .info-icon {
+    color: var(--accent-secondary);
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 10px var(--accent-color));
 }
 
 .info-label {
     font-size: 1rem;
     color: var(--text-light);
     margin: 0;
+    transition: color 0.3s ease;
+}
+
+.info-item:hover .info-label {
+    color: var(--accent-color);
 }
 
 .info-detail {
@@ -88,14 +207,21 @@
     font-weight: 600;
     color: var(--text-color);
     margin: 5px 0 0;
-    word-wrap: break-word; /* Para correos largos */
+    word-wrap: break-word;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover .info-detail {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0,196,255,0.3);
 }
 
 .info-separator {
     height: 1px;
-    background-color: var(--border-color);
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
     width: 80%;
     margin: 10px auto;
+    opacity: 0.3;
 }
 
 /* --- Columna 2: Formulario --- */
@@ -108,6 +234,13 @@
 .form-row {
     display: flex;
     gap: 20px;
+    animation: slideInRight 0.6s ease-out backwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(30px); }
+    100% { opacity: 1; transform: translateX(0); }
 }
 
 .form-input, .form-textarea {
@@ -119,13 +252,19 @@
     color: var(--text-color);
     font-size: 1rem;
     outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: slideInRight 0.6s ease-out backwards;
 }
 
-/* 🚨 Estilo al enfocar/escribir 🚨 */
+.form-input:nth-of-type(1) { animation-delay: 0.7s; }
+.form-input:nth-of-type(2) { animation-delay: 0.8s; }
+.form-textarea { animation-delay: 0.9s; }
+
 .form-input:focus, .form-textarea:focus {
     border-color: var(--accent-color);
-    box-shadow: 0 0 5px rgba(0, 196, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 196, 255, 0.3), inset 0 0 10px rgba(0, 196, 255, 0.1);
+    transform: translateY(-2px);
 }
 
 .form-textarea {
@@ -133,32 +272,67 @@
     min-height: 150px;
 }
 
-/* Estilo para el placeholder */
 .form-input::placeholder, .form-textarea::placeholder {
     color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.form-input:focus::placeholder, .form-textarea:focus::placeholder {
+    color: var(--accent-color);
 }
 
 /* Botón de Enviar */
 .submit-button {
-    align-self: flex-start; /* Alinea el botón a la izquierda */
-    background-color: var(--accent-color);
-    color: var(--bg-primary); /* Texto oscuro sobre acento brillante */
+    align-self: flex-start;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
+    color: #000;
     padding: 12px 25px;
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+    animation: slideInRight 0.6s ease-out 1s backwards;
 }
 
-/* 🚨 Efecto Hover del Botón 🚨 */
+/* Efecto de onda al hacer hover */
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.submit-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
 .submit-button:hover {
-    background-color: #00A3D9; /* Un poco más oscuro */
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 196, 255, 0.4);
+    background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-color) 100%);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 196, 255, 0.5);
+}
+
+.submit-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Animación de envío */
+@keyframes sendAnimation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100px); opacity: 0; }
 }
 
 /* --- Media Queries --- */
@@ -175,7 +349,7 @@
         gap: 10px;
     }
     .submit-button {
-        align-self: center; /* Centramos el botón en móvil */
+        align-self: center;
     }
 }
 
@@ -188,5 +362,8 @@
     }
     .card {
         padding: 30px 20px;
+    }
+    .info-detail {
+        font-size: 1rem;
     }
 }

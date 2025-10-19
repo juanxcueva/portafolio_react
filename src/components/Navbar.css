@@ -1,211 +1,266 @@
-/* src/components/Navbar.css (VERSION FINAL Y CORREGIDA PARA TAMAÑO Y MÓVIL) */
+/* src/components/Navbar.css (MEJORADO CON EFECTOS MODERNOS) */
 
 :root {
-    --bg-primary: #121212; 
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
     --text-color: #e0e0e0;
-    --accent-color: #00C4FF; /* Color Flutter/Cyan */
+    --accent-color: #00C4FF;
+    --accent-secondary: #00E5FF;
+    --shadow-dark: rgba(0, 0, 0, 0.7);
 }
 
-/* 🚨 CLAVE: Fijo en la parte superior 🚨 */
 .navbar {
-    background-color: rgba(18, 18, 18, 0.95); /* Fondo oscuro semi-transparente */
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.1rem;
-    position: sticky; 
+    position: fixed;
     top: 0;
-    z-index: 1000; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px); /* Efecto de desenfoque moderno */
+    left: 0;
+    width: 100%;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    padding: 15px 40px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0, 196, 255, 0.1);
+    animation: slideDown 0.5s ease-out;
 }
 
-.navbar-container {
+@keyframes slideDown {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Efecto al hacer scroll */
+.navbar.scrolled {
+    padding: 10px 40px;
+    background: rgba(18, 18, 18, 0.95);
+    box-shadow: 0 4px 40px rgba(0, 196, 255, 0.2);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
-    z-index: 1;
-    width: 100%;
-    max-width: 1300px;
-    padding: 0 50px;
 }
 
-/* 🚨 ESTILOS DEL LOGO (SOLUCIÓN DE TAMAÑO Y ESCRITORIO) 🚨 */
-.navbar-logo {
-    /* 🔑 SOLUCIÓN DE TAMAÑO: Definimos la altura aquí */
-    height: 55px; 
-    
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    
-    color: #fff;
-    justify-self: flex-start;
+/* Logo */
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     cursor: pointer;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: fadeIn 0.8s ease-out 0.2s backwards;
 }
 
-/* 🔑 SOLUCIÓN DE TAMAÑO: La imagen ocupa el 100% de la altura de .navbar-logo */
-.navbar-logo img.logo-image { 
-    height: 100%; 
-    min-height: 55px; /* Evita que se encoja */
-    width: auto;
-    
-    filter: drop-shadow(0 0 5px var(--accent-color)); 
-    transition: filter 0.3s ease-in-out;
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
 }
 
-.navbar-logo:hover img.logo-image {
+.nav-logo:hover {
+    transform: scale(1.05);
     filter: drop-shadow(0 0 10px var(--accent-color));
 }
 
-.logo-text-complementary {
-    font-size: 1.8rem; 
-    color: #fff;
-    transition: color 0.3s;
-}
-
-.navbar-logo:hover .logo-text-complementary {
-    color: var(--accent-color);
-}
-/* FIN ESTILOS DE LOGO ESCRITORIO */
-
-
-/* 🚨 ESTILOS DE NAVEGACIÓN PRINCIPAL 🚨 */
-.nav-menu {
+/* Links de navegación */
+.nav-links {
     display: flex;
+    gap: 40px;
     list-style: none;
-    text-align: center;
-    margin-bottom: 0;
-    align-items: center; /* Centrado vertical de los enlaces */
+    margin: 0;
+    padding: 0;
 }
 
-.nav-item {
-    display: flex;
-    margin: 0 10px;
+.nav-links li {
+    animation: fadeIn 0.8s ease-out backwards;
 }
 
-.nav-link {
+.nav-links li:nth-child(1) { animation-delay: 0.3s; }
+.nav-links li:nth-child(2) { animation-delay: 0.4s; }
+.nav-links li:nth-child(3) { animation-delay: 0.5s; }
+.nav-links li:nth-child(4) { animation-delay: 0.6s; }
+.nav-links li:nth-child(5) { animation-delay: 0.7s; }
+
+.nav-links a {
     color: var(--text-color);
     text-decoration: none;
-    padding: 28px 15px; /* Padding ajustado para centrar */
-    transition: all 0.3s ease-out;
-    border-bottom: none; 
+    font-size: 1rem;
     font-weight: 500;
-    display: block; 
-    position: relative; 
-    z-index: 1;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    display: inline-block;
 }
 
-/* 🚨 ESTILO CHEVERE: Underline Dot Flotante (Hover) 🚨 */
-.nav-link::after {
+/* Efecto de subrayado animado */
+.nav-links a::before {
     content: '';
     position: absolute;
-    width: 6px; 
-    height: 6px; 
-    bottom: 10px; 
+    bottom: 0;
     left: 50%;
-    transform: translateX(-50%) scale(0); 
-    border-radius: 50%; 
-    background-color: var(--accent-color);
-    transition: transform 0.3s ease-out, background-color 0.3s;
-    z-index: 2;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
 }
 
-.nav-link:hover::after { 
-    transform: translateX(-50%) scale(1); 
+.nav-links a:hover::before {
+    width: 80%;
 }
 
-.nav-link:hover {
+.nav-links a:hover {
     color: var(--accent-color);
+    transform: translateY(-3px);
 }
-/* FIN ESTILOS DE HOVER */
 
+.nav-links a.active {
+    color: var(--accent-color);
+    background: rgba(0, 196, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 196, 255, 0.2);
+}
 
-/* Ocultar icono en desktop */
-.menu-icon {
+/* Botón hamburguesa */
+.nav-hamburger {
     display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.3s ease;
+    z-index: 1001;
 }
 
-/* --- Media Queries para Navegación Móvil --- */
-@media screen and (max-width: 960px) {
-    .navbar-container {
-        padding: 0 20px;
-    }
-    
-    /* 🚨 AJUSTE MÓVIL CRÍTICO: Reducimos el tamaño del logo para que quepa bien 🚨 */
-    .navbar-logo {
-        height: 40px; /* Reducimos la altura del contenedor del logo */
-        /* Eliminamos la font-size para que el texto complementario lo defina */
-        font-size: initial; 
-    }
-    
-    .navbar-logo img.logo-image { 
-        height: 100%; 
-        min-height: 40px; /* El mínimo es 40px en móvil */
+.nav-hamburger:hover {
+    transform: scale(1.1);
+}
+
+.hamburger-line {
+    width: 28px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 0 10px rgba(0, 196, 255, 0.3);
+}
+
+/* Animación del hamburguesa a X */
+.nav-hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translateY(9px);
+}
+
+.nav-hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.nav-hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-9px);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
     }
 
-    .logo-text-complementary {
-        font-size: 1.4rem; /* Hacemos el texto más pequeño en móvil */
-    }
-    /* FIN AJUSTE MÓVIL DEL LOGO */
-
-
-    .nav-menu {
+    .nav-hamburger {
         display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100vh;
-        position: absolute;
-        top: 80px;
-        left: -100%; 
-        opacity: 1;
-        transition: all 0.5s ease;
-        background-color: var(--bg-primary); 
-        align-items: flex-start; 
-        padding-top: 20px;
     }
 
-    .nav-menu.active {
-        left: 0; 
-        opacity: 1;
-        transition: all 0.5s ease;
-    }
-
-    .nav-item {
-        width: 100%;
-        height: 50px; 
-        justify-content: center;
-        margin: 0;
-    }
-
-    .nav-link {
-        padding: 10px 20px; 
-        width: 100%;
-        display: block;
-    }
-    
-    .nav-link::after {
-        content: none; /* Quitamos el punto en móvil */
-    }
-
-    .nav-link:hover {
-        border-bottom: none;
-        background-color: #2a2a2a; 
-    }
-
-    .menu-icon {
-        display: block; 
-        position: absolute;
+    .nav-links {
+        position: fixed;
         top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        background: linear-gradient(135deg, rgba(18, 18, 18, 0.98) 0%, rgba(10, 10, 10, 0.98) 100%);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.8);
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border-left: 1px solid rgba(0, 196, 255, 0.2);
+    }
+
+    .nav-links.active {
         right: 0;
-        transform: translate(-100%, 60%);
-        font-size: 1.8rem;
-        cursor: pointer;
-        color: var(--accent-color);
+    }
+
+    .nav-links li {
+        width: 100%;
+        opacity: 0;
+        transform: translateX(50px);
+        animation: slideInFromRight 0.4s ease-out forwards;
+    }
+
+    .nav-links.active li:nth-child(1) { animation-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { animation-delay: 0.2s; }
+    .nav-links.active li:nth-child(3) { animation-delay: 0.3s; }
+    .nav-links.active li:nth-child(4) { animation-delay: 0.4s; }
+    .nav-links.active li:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes slideInFromRight {
+        0% { opacity: 0; transform: translateX(50px); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px 20px;
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+
+    .nav-links a::before {
+        display: none;
+    }
+
+    .nav-links a:hover {
+        background: rgba(0, 196, 255, 0.15);
+        transform: translateX(10px);
+    }
+}
+
+/* Overlay para cerrar el menú móvil */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 576px) {
+    .nav-logo {
+        font-size: 1.3rem;
+    }
+
+    .nav-links {
+        width: 85%;
     }
 }

@@ -1,17 +1,129 @@
-/* src/App.css */
-html {
-    /* 🔑 CLAVE: Habilita el desplazamiento suave en toda la página */
-    scroll-behavior: smooth; 
+/* src/App.css (MEJORADO CON ESTILOS GLOBALES) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-light: #a0a0a0;
+    --accent-color: #00C4FF;
+    --accent-secondary: #00E5FF;
+    --shadow-dark: rgba(0, 0, 0, 0.7);
 }
 
 .App {
-  text-align: center;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Scroll suave para toda la app */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Personalización del scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+    border-left: 1px solid rgba(0,196,255,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent-color), var(--accent-secondary));
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--accent-secondary), var(--accent-color));
+}
+
+/* Selección de texto personalizada */
+::selection {
+    background: rgba(0, 196, 255, 0.3);
+    color: #fff;
+}
+
+::-moz-selection {
+    background: rgba(0, 196, 255, 0.3);
+    color: #fff;
+}
+
+/* Animación de fade in general */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Loading spinner (opcional) */
+.loading-spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 196, 255, 0.2);
+    border-top: 5px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Cursor personalizado (opcional) */
+body {
+    cursor: default;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+/* Transiciones suaves para todos los links */
+a {
+    transition: all 0.3s ease;
+}
+
+/* Estilos para focus accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Utility classes */
+.text-gradient {
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glow-effect {
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.container-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
 }

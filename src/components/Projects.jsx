@@ -1,90 +1,125 @@
-// src/components/Projects.jsx
+// src/components/Projects.jsx (MEJORADO CON DATOS DE EJEMPLO)
 import React from 'react';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import './Projects.css';
+import TresEnRayaImg from '../assets/TresEnRaya.png';
+import EcuScanQRImg from '../assets/EcuScanQR.png';
+import EntregasImg from '../assets/Entregas.png';
+import PokedexImg from '../assets/Pokedex.png';
 
-// 🚨 DEFINICIÓN DE TUS PROYECTOS
-const projectData = [
-  {
-    title: 'NuxUI',
-    description: 'Una aplicación con ejemplos de UX/UI modernas y minimalistas.',
-    image: 'src/assets/nuxui-preview.png', // Reemplaza con la ruta de tu imagen de NuxUI
-    link: '#',
-    tags: ['Flutter', 'UI/UX'],
-  },
-  {
-    title: 'ScanNcreateQR',
-    description: 'Aplicación creada para leer, crear y visualizar QR\'s de cualquier tipo.',
-    image: 'src/assets/scanncreateqr-preview.png', // Reemplaza con la ruta
-    link: '#',
-    tags: ['Flutter', 'Mobile', 'QR'],
-  },
-  {
-    title: 'Tic Tac Toe - Online',
-    description: '3 modos de juego: Solo vs Bot, con un amigo, y Online. Ejemplos de UX/UI modernas y minimalistas.',
-    image: 'src/assets/tictactoe-preview.png', // Reemplaza con la ruta
-    link: '#',
-    tags: ['Flutter', 'Online', 'Firebase'],
-  },
-  {
-    title: 'Vault Free',
-    description: 'Una aplicación de seguridad y gestión de contraseñas con un diseño moderno.',
-    image: 'src/assets/vaultfree-preview.png', // Reemplaza con la ruta
-    link: '#',
-    tags: ['Flutter', 'Security', 'LocalDB'],
-  },
-  {
-    title: 'Material Color Palette',
-    description: 'Herramienta para desarrolladores que muestra paletas de colores basadas en Material Design.',
-    image: 'src/assets/materialcolor-preview.png', // Reemplaza con la ruta
-    link: '#',
-    tags: ['React', 'Web', 'UI'],
-  },
+
+
+const projectsData = [
+    {
+        id: 1,
+        title: 'EcuaTresEnRaya',
+        description: 'Aplicación móvil de Tres en Raya.',
+        image: TresEnRayaImg,
+        technologies: ['Flutter', 'Dart'],
+        githubLink: 'https://github.com/juanxcueva/ecua_tres_en_raya',
+        liveLink: 'https://play.google.com/store/apps/details?id=com.juanxcueva.tictacecuador',
+        status: 'Completado'
+    },
+    {
+        id: 2,
+        title: 'EcuScanQR',
+        description: 'Aplicación móvil para escanear y generar códigos QR.',
+        image: EcuScanQRImg,
+        technologies: ['Flutter', 'Hive', 'Dart'],
+        githubLink: 'https://github.com/juanxcueva/ecuscanqr',
+        liveLink: 'https://play.google.com/store/apps/details?id=com.juanxcueva.ecuscanqr',
+        status: 'Completado'
+    },
+    {
+        id: 3,
+        title: 'Entregas',
+        description: 'Aplicación móvil para la gestión de entregas de gasolina.',
+        image: EntregasImg,
+        technologies: ['Flutter', 'Node.js', 'Express', 'PostgreSQL'],
+        githubLink: 'https://github.com/juanxcueva/entregas',
+        liveLink: null,
+        status: 'Completado'
+    },
+    {
+        id: 4,
+        title: 'Pokedex App',
+        description: 'Aplicación móvil para explorar y conocer información sobre los Pokémon.',
+        image: PokedexImg,
+        technologies: ['Flutter', 'PokéAPI', 'Dart'],
+        githubLink: 'https://github.com/juanxcueva/pokedex_app',
+        liveLink: null,
+        status: 'Completado'
+    },
 ];
 
 const Projects = () => {
-  return (
-    <section className="projects-section">
-      <div className="container">
-        <h2 className="section-title">Algunos de mis Proyectos</h2>
-        <p className="section-subtitle">
-          Estos son algunos de mis proyectos meticulosamente elaborados con amor y dedicación.
-        </p>
+    const handleLinkClick = (url) => {
+        if (url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+    };
 
-        {/* 🚨 CUADRÍCULA DE PROYECTOS 🚨 */}
-        <div className="projects-grid">
-          {projectData.map((project, index) => (
-            <a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="project-card" 
-              key={index}
-            >
-              {/* Contenedor de la Imagen (para control de tamaño) */}
-              <div className="project-image-container">
-                <img 
-                  src={project.image} 
-                  alt={`Previsualización de ${project.title}`} 
-                  className="project-image"
-                />
-              </div>
-
-              <div className="project-details">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
+    return (
+        <section className="projects-section">
+            <div className="container">
+                <h2 className="projects-main-title">Proyectos Destacados</h2>
                 
-                <div className="project-tags">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="tag">{tag}</span>
-                  ))}
+                <div className="projects-grid">
+                    {projectsData.map((project) => (
+                        <div key={project.id} className="project-card">
+                            <div className="project-image-wrapper">
+                                {project.status && (
+                                    <div className="project-status">
+                                        {project.status}
+                                    </div>
+                                )}
+                                <img 
+                                    src={project.image} 
+                                    alt={project.title}
+                                    className="project-image"
+                                />
+                            </div>
+                            
+                            <div className="project-content">
+                                <h3 className="project-title">{project.title}</h3>
+                                <p className="project-description">
+                                    {project.description}
+                                </p>
+                                
+                                <div className="project-tech">
+                                    {project.technologies.map((tech, index) => (
+                                        <span key={index} className="tech-tag">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                                
+                                <div className="project-links">
+                                    <button 
+                                        className="project-btn btn-secondary"
+                                        onClick={() => handleLinkClick(project.githubLink)}
+                                    >
+                                        <FaGithub size={18} />
+                                        Código
+                                    </button>
+                                    
+                                    {project.liveLink && (
+                                        <button 
+                                            className="project-btn btn-primary"
+                                            onClick={() => handleLinkClick(project.liveLink)}
+                                        >
+                                            <FaExternalLinkAlt size={16} />
+                                            Ver Demo
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 };
 
 export default Projects;

@@ -1,55 +1,118 @@
-// src/components/Navbar.jsx
-import React, { useState } from 'react';
+// src/components/Navbar.jsx (CON FUNCIONALIDAD COMPLETA)
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
-import { FaBars, FaTimes } from 'react-icons/fa'; // Para el menú móvil
-import Logo from '../assets/logo_juan.png'; // 🚨 TU LOGO IMPORTADO 🚨
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  // Lista de enlaces que coinciden con tus secciones
-  const navLinks = [
-    { title: 'Inicio', href: '#header' },
-    { title: 'Skill', href: '#skill-section' },
-    { title: 'Portafolio', href: '#projects-section' },
-    { title: 'Acerca de Mí', href: '#about-section' },
-    { title: 'Contacto', href: '#contact-section' },
-  ];
+    const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+    // Detectar scroll para cambiar el estilo del navbar
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* 🚨 ESTRUCTURA DEL LOGO 🚨 */}
-        <a href="#header" className="navbar-logo">
-          <img src={Logo} alt="Juan Cueva Developer Logo" className="logo-image" />
-          <span className="logo-text-complementary">juanxcueva</span>
-        </a>
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Smooth scroll y cierre del menú móvil
+    const handleClick = (e, targetId) => {
+        e.preventDefault();
+        setIsOpen(false);
         
-        {/* Botón de Menú para Móviles */}
-        <div className="menu-icon" onClick={toggleMenu}>
-          {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
-        </div>
+        const element = document.getElementById(targetId);
+        if (element) {
+            const navbarHeight = 70;
+            const elementPosition = element.offsetTop - navbarHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
 
-        {/* Enlaces de Navegación */}
-        <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-          {navLinks.map((link, index) => (
-            <li key={index} className="nav-item">
-              <a 
-                href={link.href} 
-                className="nav-link"
-                onClick={() => setIsOpen(false)} // Cierra el menú al hacer clic en móvil
-              >
-                {link.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
-  );
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <>
+            <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+                <div className="nav-container">
+                    <div className="nav-logo" onClick={(e) => handleClick(e, 'header')}>
+                        &lt;JC /&gt;
+                    </div>
+
+                    <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
+                        <li>
+                            <a 
+                                href="#header" 
+                                onClick={(e) => handleClick(e, 'header')}
+                                className={activeSection === 'header' ? 'active' : ''}
+                            >
+                                Inicio
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#about" 
+                                onClick={(e) => handleClick(e, 'about')}
+                                className={activeSection === 'about' ? 'active' : ''}
+                            >
+                                Sobre mí
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#skills" 
+                                onClick={(e) => handleClick(e, 'skills')}
+                                className={activeSection === 'skills' ? 'active' : ''}
+                            >
+                                Habilidades
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#projects" 
+                                onClick={(e) => handleClick(e, 'projects')}
+                                className={activeSection === 'projects' ? 'active' : ''}
+                            >
+                                Proyectos
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#contact" 
+                                onClick={(e) => handleClick(e, 'contact')}
+                                className={activeSection === 'contact' ? 'active' : ''}
+                            >
+                                Contacto
+                            </a>
+                        </li>
+                    </ul>
+
+                    <button 
+                        className={`nav-hamburger ${isOpen ? 'active' : ''}`}
+                        onClick={toggleMenu}
+                        aria-label="Toggle menu"
+                    >
+                        <span className="hamburger-line"></span>
+                        <span className="hamburger-line"></span>
+                        <span className="hamburger-line"></span>
+                    </button>
+                </div>
+            </nav>
+
+            {/* Overlay para cerrar el menú en móvil */}
+            <div 
+                className={`nav-overlay ${isOpen ? 'active' : ''}`}
+                onClick={() => setIsOpen(false)}
+            />
+        </>
+    );
 };
 
 export default Navbar;

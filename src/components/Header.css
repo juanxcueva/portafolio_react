@@ -1,10 +1,11 @@
-/* src/components/Header.css (FINAL CORREGIDO Y OPTIMIZADO PARA MÓVIL) */
+/* src/components/Header.css (MEJORADO CON ANIMACIONES Y EFECTOS) */
 
 :root {
   --bg-primary: #121212; 
   --bg-secondary: #1e1e1e; 
   --text-color: #e0e0e0;
-  --accent-color: #00C4FF; /* Color de acento Flutter/Cyan */
+  --accent-color: #00C4FF;
+  --accent-secondary: #00E5FF;
   --terminal-bg: #0d0d0d; 
   --terminal-text: #f8f8f2; 
   --shadow-dark: rgba(0, 0, 0, 0.7);
@@ -20,33 +21,58 @@ body {
   overflow-x: hidden; 
 }
 
-/* --- CONTENEDOR PRINCIPAL (ESCRITORIO) --- */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #0a0a0a 100%);
   color: var(--text-color);
   padding: 50px 80px;
   box-sizing: border-box;
   gap: 60px;
   width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-/* --- Left Section (Profile) --- */
+/* Efecto de partículas de fondo */
+.header::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0,196,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: particlesMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particlesMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
 .left-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 45%; /* Ancho en escritorio */
+  width: 45%;
   padding: 40px;
-  background-color: var(--bg-secondary);
-  border-radius: 16px; 
-  box-shadow: 0 8px 20px var(--shadow-dark);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(30, 30, 30, 0.8) 100%);
+  border-radius: 20px; 
+  box-shadow: 0 15px 35px var(--shadow-dark), 0 0 0 1px rgba(0,196,255,0.1);
   text-align: center;
   animation: fadeInFromLeft 1s ease-out forwards;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.left-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px var(--shadow-dark), 0 0 0 1px rgba(0,196,255,0.3);
 }
 
 @keyframes fadeInFromLeft {
@@ -54,7 +80,28 @@ body {
   100% { opacity: 1; transform: translateX(0); }
 }
 
-/* --- IMAGEN DE PERFIL --- */
+/* Brillo animado alrededor de la tarjeta */
+.left-section::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary), var(--accent-color));
+  border-radius: 20px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+  animation: rotateBorder 3s linear infinite;
+}
+
+.left-section:hover::before {
+  opacity: 0.4;
+}
+
+@keyframes rotateBorder {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
 .header-img {
   width: 140px;
   height: 140px;
@@ -62,24 +109,37 @@ body {
   object-fit: cover;
   margin-bottom: 25px;
   border: 4px solid var(--accent-color); 
-  box-shadow: 0 0 15px var(--accent-color); 
-  animation: rotateImage 5s ease-in-out infinite alternate;
-  transition: box-shadow 0.3s ease-in-out; 
+  box-shadow: 0 0 20px var(--accent-color), 0 8px 16px rgba(0,0,0,0.4); 
+  animation: pulseGlow 3s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
 }
 
 .header-img:hover {
-  box-shadow: 0 0 30px var(--accent-color), 0 0 40px var(--hover-glow); 
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 35px var(--accent-color), 0 0 50px var(--hover-glow); 
 }
 
-@keyframes rotateImage {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(3deg); }
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px var(--accent-color), 0 8px 16px rgba(0,0,0,0.4);
+  }
+  50% { 
+    box-shadow: 0 0 30px var(--accent-color), 0 0 40px var(--hover-glow), 0 8px 16px rgba(0,0,0,0.4);
+  }
 }
 
 h1 {
   font-size: 2.3rem; 
   margin: 10px 0 5px 0;
   color: #fff;
+  text-shadow: 0 2px 10px rgba(0,196,255,0.3);
+  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .title {
@@ -87,6 +147,7 @@ h1 {
   margin: 0;
   color: #a0a0a0;
   font-weight: 300;
+  animation: fadeInUp 0.8s ease-out 0.5s backwards;
 }
 
 .description {
@@ -94,33 +155,47 @@ h1 {
   color: var(--text-color);
   margin: 25px 0 30px 0; 
   line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.7s backwards;
 }
 
-/* --- REDES SOCIALES --- */
 .social-links {
   display: flex;
   gap: 25px; 
   margin-top: 15px;
+  animation: fadeInUp 0.8s ease-out 0.9s backwards;
 }
 
 .social-links a {
   text-decoration: none;
   color: var(--accent-color);
-  transition: color 0.3s ease-in-out, transform 0.2s, text-shadow 0.3s;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+}
+
+.social-links a::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: radial-gradient(circle, var(--hover-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-links a:hover::before {
+  opacity: 1;
 }
 
 .social-links a:hover {
   color: #fff;
-  transform: translateY(-5px) scale(1.1); 
-  text-shadow: 0 0 5px var(--accent-color);
+  transform: translateY(-8px) scale(1.2) rotate(5deg); 
+  filter: drop-shadow(0 5px 10px var(--accent-color));
 }
 
-/* --- Right Section (Tarjeta de Código) --- */
 .right-section {
   display: flex;
   justify-content: flex-start; 
   align-items: center;
-  width: 55%; /* Ancho en escritorio */
+  width: 55%;
   min-width: 0; 
   animation: fadeInFromRight 1s ease-out forwards;
 }
@@ -132,19 +207,41 @@ h1 {
 
 .code-card {
   position: relative;
-  background-color: var(--terminal-bg);
+  background: linear-gradient(135deg, var(--terminal-bg) 0%, #000000 100%);
   padding-top: 40px; 
   border-radius: 16px; 
   width: 100%;
   max-width: 700px; 
   height: 380px; 
   font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-  box-shadow: 0 0 25px var(--shadow-dark);
+  box-shadow: 0 15px 40px var(--shadow-dark), 0 0 0 1px rgba(0,196,255,0.1);
   overflow: hidden; 
-  border: 1px solid rgba(255, 255, 255, 0.05); 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Botones de Ventana (Mac Style) */
+.code-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px var(--shadow-dark), 0 0 0 1px rgba(0,196,255,0.3);
+}
+
+/* Efecto de escaneo en el código */
+.code-card::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0,196,255,0.05), transparent);
+  animation: scan 4s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%, 100% { top: -100%; }
+  50% { top: 100%; }
+}
+
 .window-buttons {
   position: absolute;
   top: 15px;
@@ -158,71 +255,123 @@ h1 {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-.dot.red { background-color: #ff5f57; }
-.dot.yellow { background-color: #ffbd2e; }
-.dot.green { background-color: #27c93f; }
+.dot.red { 
+  background: linear-gradient(135deg, #ff5f57 0%, #ff3838 100%);
+}
+.dot.yellow { 
+  background: linear-gradient(135deg, #ffbd2e 0%, #ffa500 100%);
+}
+.dot.green { 
+  background: linear-gradient(135deg, #27c93f 0%, #1fa830 100%);
+}
 
 .dot:hover {
-  opacity: 0.8;
-  transform: scale(1.1);
-  cursor: pointer; 
+  transform: scale(1.3);
+  box-shadow: 0 0 10px currentColor;
 }
 
-/* Código Estático */
+.dot.red:hover { box-shadow: 0 0 15px #ff5f57; }
+.dot.yellow:hover { box-shadow: 0 0 15px #ffbd2e; }
+.dot.green:hover { box-shadow: 0 0 15px #27c93f; }
+
 .static-code {
   white-space: pre; 
   word-wrap: normal;
   color: var(--terminal-text); 
   font-size: 0.85rem;
-  line-height: 1.5;
+  line-height: 1.6;
   height: calc(100% - 40px);
   margin: 0;
   padding: 20px; 
   overflow-y: auto; 
   overflow-x: auto; 
-  text-align: left; 
+  text-align: left;
+  animation: typewriter 2s steps(100) 0.5s backwards;
 }
 
-/* Estilos de colores de código */
-.keyword { color: #cc7832; }
-.variable { color: #ffc66d; }
-.string { color: #a5c261; }
+@keyframes typewriter {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.keyword { 
+  color: #cc7832; 
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(204, 120, 50, 0.5);
+}
+.variable { 
+  color: #ffc66d;
+  text-shadow: 0 0 5px rgba(255, 198, 109, 0.3);
+}
+.string { 
+  color: #a5c261;
+  text-shadow: 0 0 5px rgba(165, 194, 97, 0.3);
+}
 .property { color: #e8bf6a; }
-.number { color: #6897bb; }
+.number { 
+  color: #6897bb;
+  font-weight: 600;
+}
 .brace, .array-bracket, .parenthesis { color: #f8f8f2; }
-.function { color: #ffc66d; }
-.comment { color: #808080; }
+.function { 
+  color: #ffc66d;
+  font-style: italic;
+}
+.comment { 
+  color: #808080;
+  font-style: italic;
+}
 
+/* Scrollbar personalizado */
+.static-code::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-/* --- Media Queries (Responsive Design) --- */
+.static-code::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
 
-/* 🔑 PROBLEMA CORREGIDO: APILAR ELEMENTOS EN TABLET Y MÓVIL */
+.static-code::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.static-code::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
 @media (max-width: 992px) {
   .header {
-    /* 🔑 CLAVE: Hace que left-section y right-section se apilen */
     flex-direction: column; 
-    min-height: auto; /* Permite que el contenido determine la altura */
-    padding: 60px 30px; /* Ajuste de padding en tablet */
+    min-height: auto;
+    padding: 60px 30px;
     gap: 40px;
     width: 100%;
   }
 
-  /* Los dos contenedores ahora ocupan todo el ancho */
+  .header::before {
+    animation: none;
+  }
+
   .left-section,
   .right-section {
     width: 100%;
     min-width: auto;
     padding: 30px;
-    /* Las animaciones pueden desactivarse en móvil para mejorar el rendimiento */
-    animation: none; 
+    animation: fadeInUp 0.8s ease-out backwards;
   }
 
   .code-card {
     max-width: 100%;
-    height: 350px; /* Un poco más de altura que el móvil puro */
+    height: 350px;
   }
 
   .static-code {
@@ -231,7 +380,6 @@ h1 {
   }
 }
 
-/* Ajustes finos para móviles pequeños */
 @media (max-width: 576px) {
   .header {
     padding: 40px 15px;
@@ -242,7 +390,7 @@ h1 {
   }
 
   .header-img {
-    width: 100px; /* Imagen más pequeña */
+    width: 100px;
     height: 100px;
   }
 
@@ -255,7 +403,7 @@ h1 {
   }
 
   .code-card {
-    height: 250px; /* Reducimos la altura del bloque de código */
+    height: 250px;
   }
 
   .static-code {
@@ -266,7 +414,6 @@ h1 {
     gap: 15px;
   }
   
-  /* Asegura que los íconos sociales sean visibles si son SVG */
   .social-links a svg {
     width: 22px; 
     height: 22px;

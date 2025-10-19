@@ -1,48 +1,34 @@
-// src/App.jsx
+// src/App.jsx (CON IDs PARA NAVEGACIÓN)
 import React from 'react';
-import './App.css'; 
-
-// 🚨 Importaciones de los componentes de navegación y cierre
+import './App.css';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-
-// Importaciones de las secciones principales
 import Header from './components/Header';
+import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import About from './components/About';
-import Contact from './components/Contact'; 
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
-      {/* 1. CABECERA: Siempre va primero y se mantiene fijo/sticky */}
-      <Navbar /> 
-      
-      {/* 2. SECCIONES PRINCIPALES (Asigna IDs para el Navbar) */}
+      <Navbar />
       <div id="header">
         <Header />
       </div>
-
-      {/* Asegúrate de que tus componentes Skills, Projects, About y Contact tengan su ID en el archivo JSX o un div contenedor aquí */}
-      <div id="skill-section">
-        <Skills />
-      </div>
-
-      <div id="projects-section">
-        <Projects />
-      </div>
-      
-      <div id="about-section">
+      <div id="about">
         <About />
       </div>
-
-      <div id="contact-section">
+      <div id="skills">
+        <Skills />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
+      <div id="contact">
         <Contact />
       </div>
-      
-      {/* 3. PIE DE PÁGINA: Siempre va al final */}
-      <Footer /> 
+      <Footer />
     </div>
   );
 }

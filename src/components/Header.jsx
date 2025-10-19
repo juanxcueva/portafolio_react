@@ -2,6 +2,8 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa'; 
 import './Header.css';
+import perfilImg from '../assets/perfil.JPG';
+
 
 const Header = () => {
   // El código se define como JSX para aplicar el resaltado de sintaxis
@@ -24,7 +26,8 @@ const Header = () => {
     <header className="header">
       <div className="left-section">
         <div className="profile">
-          <img src="src/assets/perfil.JPG" alt="Juan Cueva" className="header-img" />
+          <img src={perfilImg} alt="Juan Cueva" className="header-img" />
+
           <h1>Juan Cueva</h1>
           <p className="title">
             Desarrollador FrontEnd | React | Flutter | Backend | Node.js | Spring
