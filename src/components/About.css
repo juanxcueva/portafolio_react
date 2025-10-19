@@ -1,0 +1,171 @@
+/* src/components/About.css */
+
+:root {
+    /* Reusamos las variables del Header y Projects */
+    --bg-primary: #121212; 
+    --bg-secondary: #1e1e1e; /* Fondo de las tarjetas */
+    --text-color: #e0e0e0;
+    --text-light: #a0a0a0; /* Gris claro para períodos y roles secundarios */
+    --accent-color: #00C4FF; /* Color Flutter/Cyan */
+    --shadow-dark: rgba(0, 0, 0, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1); /* Borde sutil */
+}
+
+.about-section {
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-main-title {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+/* Línea decorativa bajo el título principal */
+.about-main-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* 🚨 ESTRUCTURA DE CONTENIDO (DOS COLUMNAS) 🚨 */
+.content-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: stretch; /* Asegura que ambas tarjetas tengan la misma altura */
+}
+
+/* --- ESTILO DE LAS TARJETAS (EDUCACIÓN/EXPERIENCIA) --- */
+.card {
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px var(--shadow-dark);
+    padding: 40px;
+    flex: 1; /* Ocupa el mismo espacio */
+    min-width: 400px; /* Ancho mínimo para que no se compriman demasiado */
+    text-align: left;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Línea decorativa bajo el título de la tarjeta */
+.card-title::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: var(--text-light);
+    margin: 10px 0 0;
+    border-radius: 1px;
+}
+
+/* --- ESTILO DE LÍNEA DE TIEMPO (TIMELINE) --- */
+.timeline {
+    border-left: 2px solid var(--border-color); /* Línea vertical sutil */
+    padding-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    /* Línea sutil entre elementos */
+    border-bottom: 1px solid var(--border-color); 
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* 🚨 PUNTO DE ÉNFASIS (CIRCULITO) 🚨 */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px; /* Ajustar para alinear con la línea */
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: 3px solid var(--bg-secondary); /* Borde para que resalte del fondo */
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+.timeline-institution {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 5px 0;
+}
+
+.timeline-degree, .timeline-role {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin: 0 0 5px 0;
+}
+
+.timeline-period {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin: 0;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 992px) {
+    .content-grid {
+        flex-direction: column; /* Apilamos las tarjetas en móvil */
+        gap: 30px;
+    }
+    .card {
+        min-width: 100%;
+        padding: 30px;
+    }
+    .about-main-title {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-section {
+        padding: 40px 10px;
+    }
+    .about-main-title {
+        font-size: 2rem;
+    }
+    .timeline {
+        padding-left: 15px;
+    }
+    .timeline-item::before {
+        left: -19px;
+    }
+    .timeline-institution {
+        font-size: 1.05rem;
+    }
+    .timeline-degree, .timeline-role {
+        font-size: 0.9rem;
+    }
+}

@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React from 'react';
+import './App.css'; 
+
+// 🚨 Importaciones de los componentes de navegación y cierre
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+// Importaciones de las secciones principales
+import Header from './components/Header';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import About from './components/About';
+import Contact from './components/Contact'; 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App">
+      {/* 1. CABECERA: Siempre va primero y se mantiene fijo/sticky */}
+      <Navbar /> 
+      
+      {/* 2. SECCIONES PRINCIPALES (Asigna IDs para el Navbar) */}
+      <div id="header">
+        <Header />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      {/* Asegúrate de que tus componentes Skills, Projects, About y Contact tengan su ID en el archivo JSX o un div contenedor aquí */}
+      <div id="skill-section">
+        <Skills />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <div id="projects-section">
+        <Projects />
+      </div>
+      
+      <div id="about-section">
+        <About />
+      </div>
+
+      <div id="contact-section">
+        <Contact />
+      </div>
+      
+      {/* 3. PIE DE PÁGINA: Siempre va al final */}
+      <Footer /> 
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,192 @@
+/* src/components/Contact.css */
+
+:root {
+    /* Reusamos las variables de color */
+    --bg-primary: #121212; 
+    --bg-secondary: #1e1e1e; /* Fondo de las tarjetas */
+    --text-color: #e0e0e0;
+    --text-light: #a0a0a0; 
+    --accent-color: #00C4FF; /* Color Flutter/Cyan */
+    --shadow-dark: rgba(0, 0, 0, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1); 
+    --input-bg: #2a2a2a; /* Fondo de inputs más claro que la tarjeta */
+}
+
+.contact-section {
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-main-title {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 60px;
+}
+
+/* Línea decorativa bajo el título principal (Consistente con About) */
+.contact-main-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* 🚨 ESTRUCTURA DE CONTENIDO (DOS COLUMNAS) 🚨 */
+.contact-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* --- ESTILO DE LAS TARJETAS --- */
+.card {
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px var(--shadow-dark);
+    padding: 40px;
+    flex: 1; 
+    min-width: 400px; 
+    text-align: left;
+}
+
+/* --- Columna 1: Info de Contacto --- */
+.contact-info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Espacia uniformemente los ítems */
+    text-align: center;
+}
+
+.info-item {
+    margin: 15px 0;
+}
+
+.info-icon {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.info-detail {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 5px 0 0;
+    word-wrap: break-word; /* Para correos largos */
+}
+
+.info-separator {
+    height: 1px;
+    background-color: var(--border-color);
+    width: 80%;
+    margin: 10px auto;
+}
+
+/* --- Columna 2: Formulario --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-input, .form-textarea {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* 🚨 Estilo al enfocar/escribir 🚨 */
+.form-input:focus, .form-textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px rgba(0, 196, 255, 0.5);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Estilo para el placeholder */
+.form-input::placeholder, .form-textarea::placeholder {
+    color: var(--text-light);
+}
+
+/* Botón de Enviar */
+.submit-button {
+    align-self: flex-start; /* Alinea el botón a la izquierda */
+    background-color: var(--accent-color);
+    color: var(--bg-primary); /* Texto oscuro sobre acento brillante */
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+/* 🚨 Efecto Hover del Botón 🚨 */
+.submit-button:hover {
+    background-color: #00A3D9; /* Un poco más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 196, 255, 0.4);
+}
+
+/* --- Media Queries --- */
+@media (max-width: 992px) {
+    .contact-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .card {
+        min-width: 100%;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .submit-button {
+        align-self: center; /* Centramos el botón en móvil */
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-section {
+        padding: 40px 10px;
+    }
+    .contact-main-title {
+        font-size: 2rem;
+    }
+    .card {
+        padding: 30px 20px;
+    }
+}

@@ -1,0 +1,155 @@
+/* src/components/Projects.css */
+
+:root {
+    /* Reusamos las variables del Header */
+    --bg-primary: #121212; 
+    --bg-secondary: #1e1e1e; /* Fondo de las tarjetas */
+    --text-color: #e0e0e0;
+    --accent-color: #00C4FF; /* Color Flutter/Cyan */
+    --shadow-dark: rgba(0, 0, 0, 0.7);
+    --hover-glow: rgba(0, 196, 255, 0.4); 
+    --tag-bg: rgba(0, 196, 255, 0.1); /* Fondo muy sutil para los tags */
+}
+
+.projects-section {
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    margin-bottom: 50px;
+}
+
+/* 🚨 ESTRUCTURA DE GRID 🚨 */
+.projects-grid {
+    display: grid;
+    /* 3 columnas en escritorio, con un mínimo de 300px por columna */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px; /* Padding interno para que no se pegue a los bordes */
+}
+
+/* --- ESTILO DE LA TARJETA --- */
+.project-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-dark);
+    text-decoration: none;
+    color: var(--text-color);
+    text-align: left;
+    overflow: hidden; /* Importante para la imagen */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 🚨 EFECTO HOVER 🚨 */
+.project-card:hover {
+    transform: translateY(-8px); /* Efecto de elevación */
+    box-shadow: 0 15px 30px var(--shadow-dark), 0 0 15px var(--hover-glow); /* Brillo */
+    /* Borde sutil al hacer hover */
+    border: 1px solid var(--accent-color); 
+}
+
+/* --- IMAGEN --- */
+.project-image-container {
+    height: 200px; /* Altura fija para todas las imágenes */
+    overflow: hidden;
+    /* Usamos gradiente sutil de fondo si la imagen no llena todo */
+    background: linear-gradient(45deg, #1e1e1e, #2a2a2a); 
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+    display: block;
+    transition: transform 0.5s ease-out;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05); /* Zoom sutil en la imagen al hacer hover */
+}
+
+/* --- DETALLES DE TEXTO --- */
+.project-details {
+    padding: 20px;
+    flex-grow: 1; /* Hace que los detalles usen el espacio restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    flex-grow: 1; /* Empuja los tags hacia abajo */
+}
+
+/* --- TAGS (TECNOLOGÍAS) --- */
+.project-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: var(--accent-color);
+    background-color: var(--tag-bg);
+    border: 1px solid rgba(0, 196, 255, 0.2);
+    /* Animación al pasar el mouse */
+    transition: background-color 0.3s;
+}
+
+.tag:hover {
+    background-color: rgba(0, 196, 255, 0.3); /* Un poco más oscuro al pasar el mouse */
+}
+
+/* --- Media Queries para Responsive Design --- */
+@media (max-width: 992px) {
+    .projects-grid {
+        /* En tabletas y móviles, menos columnas para mejor visualización */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        padding: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .projects-section {
+        padding: 60px 10px;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .section-subtitle {
+        font-size: 1rem;
+    }
+}
