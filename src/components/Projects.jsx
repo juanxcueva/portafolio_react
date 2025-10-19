@@ -3,9 +3,9 @@ import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import './Projects.css';
 import TresEnRayaImg from '../assets/TresEnRaya.png';
-import EcuScanQRImg from '../assets/EcuScanQR.png';
-import EntregasImg from '../assets/Entregas.png';
-import PokedexImg from '../assets/Pokedex.png';
+import EcuScanQRImg from '../assets/EcuScanQr.png';
+import EntregasImg from '../assets/entregas.png';
+import PokedexImg from '../assets/pokedex.png';
 
 
 
