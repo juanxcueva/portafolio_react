@@ -84,15 +84,8 @@ const Navbar = () => {
                                 Proyectos
                             </a>
                         </li>
-                        <li> {/* ✅ NUEVO */}
-                            <a 
-                                href="#guestbook" 
-                                onClick={(e) => handleClick(e, 'guestbook')}
-                                className={activeSection === 'guestbook' ? 'active' : ''}
-                            >
-                                Libro de Visitas
-                            </a>
-                        </li>
+                        
+                        
                         <li>
                             <a 
                                 href="#contact" 

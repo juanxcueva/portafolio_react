@@ -187,22 +187,6 @@ const Guestbook = () => {
                   maxLength={50}
                 />
               </div>
-
-              <div className="form-group">
-                <label>
-                  <FaEnvelope className="form-icon" />
-                  Email (opcional)
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="tu@email.com"
-                  className="form-input"
-                  maxLength={100}
-                />
-              </div>
             </div>
 
             <div className="form-group">
