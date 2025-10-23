@@ -1,6 +1,6 @@
-// src/components/Navbar.jsx - CON ANALYTICS
+// src/components/Navbar.jsx - CON LINK A GUESTBOOK
 import React, { useState, useEffect } from 'react';
-import { logNavClick } from '../utils/analytics'; // ✅ Analytics
+import { logNavClick } from '../utils/analytics';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -21,7 +21,6 @@ const Navbar = () => {
         e.preventDefault();
         setIsOpen(false);
         
-        // ✅ Registrar click en navegación
         logNavClick(targetId);
         
         const element = document.getElementById(targetId);
@@ -83,6 +82,15 @@ const Navbar = () => {
                                 className={activeSection === 'projects' ? 'active' : ''}
                             >
                                 Proyectos
+                            </a>
+                        </li>
+                        <li> {/* ✅ NUEVO */}
+                            <a 
+                                href="#guestbook" 
+                                onClick={(e) => handleClick(e, 'guestbook')}
+                                className={activeSection === 'guestbook' ? 'active' : ''}
+                            >
+                                Libro de Visitas
                             </a>
                         </li>
                         <li>
