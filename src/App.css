@@ -1,129 +1,189 @@
-/* src/App.css (MEJORADO CON ESTILOS GLOBALES) */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===== FUTURISTIC DESIGN SYSTEM ===== */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #050505;
+  --bg-tertiary: #0a0a0a;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --text-color: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-muted: #6e6e73;
+  --accent-color: #00d4ff;
+  --accent-secondary: #7c3aed;
+  --accent-hover: #33ddff;
+  --accent-gradient: linear-gradient(135deg, #00d4ff, #7c3aed);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 60px rgba(0, 212, 255, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --input-focus: rgba(0, 212, 255, 0.3);
+  --success-color: #4ade80;
+  --error-color: #ef4444;
+  --gradient-primary: linear-gradient(135deg, #000 0%, #0a0a0a 100%);
+  --glass-bg: rgba(10, 10, 10, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  /* Aliases */
+  --text-primary: var(--text-color);
+  --accent: var(--accent-color);
+  --secondary: var(--accent-secondary);
+  --card-hover: var(--bg-card-hover);
 }
 
-:root {
-    --bg-primary: #121212;
-    --bg-secondary: #1e1e1e;
-    --text-color: #e0e0e0;
-    --text-light: #a0a0a0;
-    --accent-color: #00C4FF;
-    --accent-secondary: #00E5FF;
-    --shadow-dark: rgba(0, 0, 0, 0.7);
+[data-theme="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f5f5f7;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --bg-card-hover: rgba(0, 0, 0, 0.04);
+  --text-color: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-muted: #86868b;
+  --accent-color: #0071e3;
+  --accent-secondary: #7c3aed;
+  --accent-hover: #0077ed;
+  --accent-gradient: linear-gradient(135deg, #0071e3, #7c3aed);
+  --border-color: rgba(0, 0, 0, 0.06);
+  --border-hover: rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 60px rgba(0, 113, 227, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --input-bg: rgba(0, 0, 0, 0.03);
+  --input-border: rgba(0, 0, 0, 0.08);
+  --input-focus: rgba(0, 113, 227, 0.3);
+  --success-color: #22c55e;
+  --error-color: #dc2626;
+  --gradient-primary: linear-gradient(135deg, #fafafa 0%, #f5f5f7 100%);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  /* Aliases */
+  --text-primary: var(--text-color);
+  --accent: var(--accent-color);
+  --secondary: var(--accent-secondary);
+  --card-hover: var(--bg-card-hover);
 }
 
-.App {
-    min-height: 100vh;
-    background-color: var(--bg-primary);
-    color: var(--text-color);
-    overflow-x: hidden;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
-/* Scroll suave para toda la app */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Personalización del scrollbar */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-    border-left: 1px solid rgba(0,196,255,0.1);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--accent-color), var(--accent-secondary));
-    border-radius: 6px;
-    transition: background 0.3s;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--accent-secondary), var(--accent-color));
-}
-
-/* Selección de texto personalizada */
-::selection {
-    background: rgba(0, 196, 255, 0.3);
-    color: #fff;
-}
-
-::-moz-selection {
-    background: rgba(0, 196, 255, 0.3);
-    color: #fff;
-}
-
-/* Animación de fade in general */
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-/* Loading spinner (opcional) */
-.loading-spinner {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(0, 196, 255, 0.2);
-    border-top: 5px solid var(--accent-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Cursor personalizado (opcional) */
 body {
-    cursor: default;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-a, button {
-    cursor: pointer;
+#root { width: 100%; max-width: 100vw; overflow-x: hidden; }
+.App { width: 100%; max-width: 100vw; overflow-x: hidden; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
 }
 
-/* Transiciones suaves para todos los links */
-a {
-    transition: all 0.3s ease;
+section { width: 100%; max-width: 100vw; overflow: hidden; }
+
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
 }
 
-/* Estilos para focus accessibility */
-button:focus,
-a:focus,
-input:focus,
-textarea:focus {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
+.section-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 24px;
 }
 
-/* Responsive images */
-img {
-    max-width: 100%;
-    height: auto;
+[data-theme="light"] .section-tag {
+  background: rgba(0, 113, 227, 0.06);
+  border-color: rgba(0, 113, 227, 0.12);
 }
 
-/* Utility classes */
-.text-gradient {
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: var(--text-color);
 }
 
-.glow-effect {
-    box-shadow: 0 0 20px var(--accent-color);
+.section-desc {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 16px auto 0;
+  line-height: 1.7;
 }
 
-.container-wrapper {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; }
+a:hover { color: var(--accent-hover); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.25); }
+
+::selection { background: var(--accent-color); color: #000; }
+
+.App::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+@media (max-width: 768px) {
+  .section-header { margin-bottom: 48px; }
+  .section-desc { font-size: 16px; }
 }

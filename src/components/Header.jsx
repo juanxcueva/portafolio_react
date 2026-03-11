@@ -1,80 +1,138 @@
-// src/components/Header.jsx - CON ANALYTICS
-import React from 'react';
-import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa'; 
-import perfilImg from '../assets/perfil.JPG'; // ✅ Importa la imagen
-import { logSocialClick } from '../utils/analytics'; // ✅ Analytics
+import React, { useState, useEffect, useMemo } from 'react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useTypewriter } from '../hooks/useTypewriter';
 import './Header.css';
 
 const Header = () => {
-  const codeBlock = (
-    <pre className="static-code">
-      <span className="keyword">const</span> <span className="variable">developer</span> = <span className="brace">{'{'}</span>
-      {"\n"}  <span className="property">name</span>: <span className="string">'Juan Cueva'</span>,
-      {"\n"}  <span className="property">role</span>: <span className="string">'Desarrollador Fullstack Dev 🚀'</span>,
-      {"\n"}  <span className="property">level</span>: <span className="number">26</span>,
-      {"\n"}  <span className="property">experienceYears</span>: <span className="number">4</span>,
-      {"\n"}  <span className="property">techStack</span>: <span className="array-bracket">['React', 'Flutter', 'Node.js', 'Spring']</span>,
-      {"\n"}  <span className="property">status</span>: <span className="string">'Grinding XP and open to new adventures 🎮'</span>,
-      {"\n"}<span className="brace">{'}'}</span>;
-      {"\n\n"}
-      <span className="variable">developer</span>.<span className="function">sayHello</span><span className="parenthesis">()</span>; <span className="comment">// returns "Hello, I'm Juan!"</span>
-    </pre>
+  const [scrollY, setScrollY] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const roles = [
+    'Fullstack Developer',
+    'Mobile Developer',
+    'React Enthusiast',
+    'Problem Solver'
+  ];
+
+  const { displayText } = useTypewriter(roles, 80, 40, 2500);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    const handleMouse = (e) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: (e.clientY / window.innerHeight - 0.5) * 2,
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouse);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouse);
+    };
+  }, []);
+
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        duration: `${4 + Math.random() * 6}s`,
+        delay: `${Math.random() * 5}s`,
+        size: `${1.5 + Math.random() * 2.5}px`,
+      })),
+    []
   );
 
-  // ✅ Función para manejar clicks en redes sociales
-  const handleSocialClick = (platform, url) => {
-    logSocialClick(platform); // 📊 Registrar en Analytics
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
   return (
-    <header className="header">
-      <div className="left-section">
-        <div className="profile">
-          <img src={perfilImg} alt="Juan Cueva" className="header-img" />
-          <h1>Juan Cueva</h1>
-          <p className="title">
-            Desarrollador FrontEnd | React | Flutter | Backend | Node.js | Spring
-          </p>
-          <p className="description">
-            Apasionado por el desarrollo de software, siempre aprendiendo nuevas tecnologías. ¡Listo para nuevos desafíos!
-          </p>
-          <div className="social-links">
-            {/* ✅ Clicks rastreados */}
-            <button
-              onClick={() => handleSocialClick('LinkedIn', 'https://www.linkedin.com/in/juanxcueva/')}
-              aria-label="LinkedIn"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              <FaLinkedin size={24} />
-            </button>
-            <button
-              onClick={() => handleSocialClick('GitHub', 'https://github.com/juanxcueva')}
-              aria-label="GitHub"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              <FaGithub size={24} />
-            </button>
-            <button
-              onClick={() => handleSocialClick('Instagram', 'https://www.instagram.com/juanxcueva/')}
-              aria-label="Instagram"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              <FaInstagram size={24} />
-            </button>
-          </div>
+    <header className="hero" id="header">
+      <div className="hero-bg">
+        <div
+          className="hero-gradient-1"
+          style={{ transform: `translate(${mousePos.x * 40}px, ${mousePos.y * 40}px)` }}
+        />
+        <div
+          className="hero-gradient-2"
+          style={{ transform: `translate(${mousePos.x * -25}px, ${mousePos.y * -25}px)` }}
+        />
+        <div className="hero-grid-pattern" />
+        <div className="hero-vignette" />
+      </div>
+
+      <div className="hero-particles">
+        {particles.map((p) => (
+          <div
+            key={p.id}
+            className="particle"
+            style={{
+              '--x': p.x,
+              '--y': p.y,
+              '--duration': p.duration,
+              '--delay': p.delay,
+              '--size': p.size,
+            }}
+          />
+        ))}
+      </div>
+
+      <div
+        className="hero-content"
+        style={{
+          transform: `translateY(${scrollY * 0.35}px)`,
+          opacity: Math.max(0, 1 - scrollY / 700),
+        }}
+      >
+        <span className="hero-badge">Disponible para trabajar</span>
+
+        <h1 className="hero-name">
+          <span className="hero-name-line hero-name-fade-1">Juan</span>
+          <span className="hero-name-line hero-name-gradient hero-name-fade-2">Cueva.</span>
+        </h1>
+
+        <div className="hero-role">
+          <span className="hero-role-text">{displayText}</span>
+          <span className="hero-cursor">|</span>
+        </div>
+
+        <p className="hero-desc">
+          Creando experiencias digitales que combinan
+          <br />
+          <strong>diseño, tecnología y creatividad.</strong>
+        </p>
+
+        <div className="hero-cta">
+          <a href="#projects" className="hero-btn-primary">
+            Explorar proyectos
+            <span className="btn-arrow">→</span>
+          </a>
+          <a
+            href="https://github.com/juanxcueva"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-btn-icon"
+            aria-label="GitHub"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/juanxcueva/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-btn-icon"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin />
+          </a>
         </div>
       </div>
 
-      <div className="right-section">
-        <div className="code-card">
-          <div className="window-buttons">
-            <div className="dot red"></div>
-            <div className="dot yellow"></div>
-            <div className="dot green"></div>
-          </div>
-          {codeBlock}
-        </div>
+      <div
+        className="hero-scroll"
+        style={{ opacity: Math.max(0, 1 - scrollY / 300) }}
+      >
+        <div className="hero-scroll-line" />
+        <span className="hero-scroll-text">SCROLL</span>
       </div>
     </header>
   );

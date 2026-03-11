@@ -1,4 +1,4 @@
-// src/App.jsx - CON GUESTBOOK
+import './styles/animations.css';
 import React, { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { initGA, logPageView, logDeviceInfo } from './utils/analytics';
@@ -8,7 +8,6 @@ import Header from './components/Header';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Guestbook from './components/Guestbook'; // ✅ NUEVO
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -17,36 +16,22 @@ function App() {
     initGA();
     logPageView();
     logDeviceInfo();
-
     const startTime = Date.now();
-    
     return () => {
       const timeSpent = Math.floor((Date.now() - startTime) / 1000);
-      console.log(`⏱️ Tiempo en la página: ${timeSpent} segundos`);
+      console.log('Time on page: ' + timeSpent + 's');
     };
   }, []);
 
   return (
     <div className="App">
       <Navbar />
-      <div id="header">
-        <Header />
-      </div>
-      <div id="about">
-        <About />
-      </div>
-      <div id="skills">
-        <Skills />
-      </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      {/* <div id="guestbook"> {/* ✅ NUEVO */}
-      <div id="contact">
-        <Contact />
-      </div>
+      <Header />
+      <About />
+      <Skills />
+      <Projects />
+      <Contact />
       <Footer />
-      
       <Analytics />
     </div>
   );

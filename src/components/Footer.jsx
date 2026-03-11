@@ -1,81 +1,52 @@
-// src/components/Footer.jsx (MEJORADO CON SCROLL TO TOP)
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { FaGithub, FaLinkedin, FaInstagram, FaArrowUp } from 'react-icons/fa';
 import './Footer.css';
-import { FaHeart, FaCode, FaLinkedin, FaGithub, FaInstagram, FaArrowUp } from 'react-icons/fa';
+
+const socials = [
+  { icon: FaGithub, href: 'https://github.com/juanxcueva', label: 'GitHub' },
+  { icon: FaLinkedin, href: 'https://linkedin.com/in/juanxcueva/', label: 'LinkedIn' },
+  { icon: FaInstagram, href: 'https://instagram.com/juanxcueva/', label: 'Instagram' },
+];
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear();
-    const [showScrollTop, setShowScrollTop] = useState(false);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowScrollTop(window.scrollY > 500);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    };
-
-    return (
-        <>
-            <footer className="footer">
-                <div className="footer-content">
-                    <div className="footer-social">
-                        <a 
-                            href="https://www.linkedin.com/in/juanxcueva/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            aria-label="LinkedIn"
-                        >
-                            <FaLinkedin size={24} />
-                        </a>
-                        <a 
-                            href="https://github.com/juanxcueva" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            aria-label="GitHub"
-                        >
-                            <FaGithub size={24} />
-                        </a>
-                        <a 
-                            href="https://www.instagram.com/juanxcueva/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            aria-label="Instagram"
-                        >
-                            <FaInstagram size={24} />
-                        </a>
-                    </div>
-
-                    <p className="footer-text">
-                        Hecho con <FaCode className="footer-icon" /> y <FaHeart className="footer-icon heart-icon" />
-                    </p>
-
-                    <div className="footer-divider"></div>
-
-                    <p className="footer-copyright">
-                        Copyright © {currentYear} <span className="footer-name">Juan Cueva</span>. All Rights Reserved.
-                    </p>
-                </div>
-            </footer>
-
-            {/* Botón de Scroll to Top */}
-            <button 
-                className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
-                onClick={scrollToTop}
-                aria-label="Scroll to top"
-            >
-                <FaArrowUp />
-            </button>
-        </>
-    );
+  return (
+    <footer className="footer-section">
+      <div className="container">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <span className="footer-logo">JC.</span>
+            <p className="footer-tagline">Creando experiencias digitales</p>
+          </div>
+          <div className="footer-socials">
+            {socials.map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                aria-label={social.label}
+              >
+                <social.icon />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p className="footer-copyright">
+            &copy; {new Date().getFullYear()} Juan Cueva. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
+      <button className="scroll-to-top" onClick={scrollToTop} aria-label="Volver arriba">
+        <FaArrowUp />
+      </button>
+    </footer>
+  );
 };
 
 export default Footer;

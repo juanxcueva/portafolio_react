@@ -1,0 +1,23 @@
+[
+    {
+        "company": "GAD Municipal de Chunchi",
+        "role": "Network and Infrastructure Support Technician and System Administrator",
+        "period": "2025 - Actualidad",
+        "icon": "🏛️",
+        "current": true
+    },
+    {
+        "company": "SystecnaSoft",
+        "role": "Fullstack Developer Mobile",
+        "period": "2023 - 2025",
+        "icon": "💻",
+        "current": false
+    },
+    {
+        "company": "ICreativa",
+        "role": "Mobile Developer",
+        "period": "2021 - 2022",
+        "icon": "📱",
+        "current": false
+    }
+]

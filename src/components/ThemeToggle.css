@@ -1,0 +1,40 @@
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+.toggle-track {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7px;
+  transition: all 0.3s ease;
+}
+.toggle-track.light {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+.icon { font-size: 12px; z-index: 1; transition: all 0.3s; }
+.sun { color: #fbbf24; opacity: 0.4; }
+.moon { color: #a78bfa; opacity: 1; }
+.toggle-track.light .sun { opacity: 1; }
+.toggle-track.light .moon { opacity: 0.4; }
+.toggle-thumb {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: var(--text-color);
+  border-radius: 50%;
+  left: 3px;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.toggle-track.light .toggle-thumb { transform: translateX(24px); }

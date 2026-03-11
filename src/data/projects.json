@@ -1,0 +1,126 @@
+[
+  {
+    "id": 1,
+    "title": "SillónPOS",
+    "subtitle": "Sistema Punto de Venta",
+    "description": "Sistema de punto de venta moderno y fácil de usar, diseñado para restaurantes y negocios de comida. Gestión de órdenes, edición de pedidos, pagos con Deuna QR, cálculos precisos y animaciones fluidas.",
+    "features": [
+      "Interfaz moderna e intuitiva",
+      "Gestión y edición de órdenes",
+      "Pago con Deuna QR",
+      "Cálculos de decimales precisos"
+    ],
+    "screenshots": [
+      "sillon1.jpeg",
+      "sillon2.jpeg",
+      "sillon3.jpeg",
+      "sillon4.jpeg",
+      "sillon5.jpeg"
+    ],
+    "logo": "sillonpos/sillon1.jpeg",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Deuna API"
+    ],
+    "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.sillonpos",
+    "status": "Publicado",
+    "platform": "android",
+    "featured": true,
+    "color": "#FF6B35"
+  },
+  {
+    "id": 2,
+    "title": "EcuaTresEnRaya",
+    "subtitle": "Juego Multijugador",
+    "description": "¡El clásico tres en raya más épico que nunca! Tres niveles de dificultad contra la IA, modo versus local, WiFi LAN, sistema de logros y experiencia inmersiva con vibración y efectos de sonido.",
+    "features": [
+      "3 niveles de dificultad IA",
+      "Modo WiFi multijugador",
+      "Sistema de logros",
+      "Estadísticas y progreso"
+    ],
+    "screenshots": [
+      "ecua1.jpeg",
+      "ecua2.jpeg",
+      "ecua3.jpeg",
+      "ecua4.jpeg",
+      "ecua5.jpeg"
+    ],
+    "logo": "ecuatresenraya/ecualogo.jpeg",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "WiFi P2P",
+      "SQLite"
+    ],
+    "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.tictacecuador",
+    "status": "Publicado",
+    "platform": "android",
+    "featured": true,
+    "color": "#7C3AED"
+  },
+  {
+    "id": 3,
+    "title": "Flappy 593",
+    "subtitle": "Juego Arcade Social",
+    "description": "El desafío clásico de volar ha vuelto y es más social que nunca. Supérate a ti mismo, desbloquea logros épicos, colecciona personajes únicos y compite con amigos.",
+    "features": [
+      "Personajes coleccionables",
+      "Logros épicos",
+      "Ranking social con amigos",
+      "Controles intuitivos"
+    ],
+    "screenshots": [
+      "flappy1.jpeg",
+      "flappy2.jpeg",
+      "flappy3.jpeg",
+      "flappy4.jpeg"
+    ],
+    "logo": "flappy593/flappy593logo.jpeg",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Flame Engine",
+      "Firebase"
+    ],
+    "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.flappy593",
+    "status": "Publicado",
+    "platform": "android",
+    "featured": false,
+    "color": "#10B981"
+  },
+  {
+    "id": 4,
+    "title": "EcuScanQR",
+    "subtitle": "Escáner de Códigos QR",
+    "description": "Crea y escanea códigos QR para sitios web, texto, email, Wi-Fi y más. Flash, cámara volteada, historial, favoritos, exportación de datos y modo oscuro.",
+    "features": [
+      "Escaneo con flash y cámara dual",
+      "Historial y favoritos",
+      "Crear QR personalizados",
+      "Modo oscuro"
+    ],
+    "screenshots": [
+      "scan1.jpeg",
+      "scan2.jpeg",
+      "scan3.jpeg",
+      "scan4.jpeg",
+      "scan5.jpeg",
+      "scan6.jpeg"
+    ],
+    "logo": "scanqr/scanlogo.jpeg",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Camera API",
+      "QR Engine"
+    ],
+    "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.ecuscanqr&pli=1",
+    "status": "Publicado",
+    "platform": "android",
+    "featured": false,
+    "color": "#0EA5E9"
+  }
+]

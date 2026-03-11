@@ -1,124 +1,183 @@
-// src/components/Projects.jsx - CON ANALYTICS
-import React from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { logProjectClick } from '../utils/analytics'; // ✅ Analytics
+import React, { useState, useRef, useEffect } from 'react';
+import { FaGooglePlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { logEvent } from '../utils/analytics';
+import projectsData from '../data/projects.json';
 import './Projects.css';
 
-// Importa tus imágenes
-import pokedexImg from '../assets/pokedex.png';
-import tresEnRayaImg from '../assets/TresEnRaya.png';
-import entregasImg from '../assets/entregas.png';
-import ecuScanImg from '../assets/EcuScanQr.png';
+/* ---- dynamic image imports from asset folders ---- */
+const screenshotModules = import.meta.glob('../assets/{sillonpos,ecuatresenraya,flappy593,scanqr}/*.jpeg', { eager: true });
 
-const projectsData = [
-  {
-    id: 1,
-    title: 'Pokedex App',
-    description: 'Aplicación de Pokédex con información detallada de todos los Pokémon, búsqueda avanzada y favoritos.',
-    image: pokedexImg,
-    technologies: ['React', 'PokeAPI', 'CSS3'],
-    githubLink: 'https://github.com/juanxcueva/pokedex',
-    liveLink: 'https://pokedex-juanxcueva.vercel.app',
-    status: 'Completado'
-  },
-  {
-    id: 2,
-    title: 'EcuScan QR',
-    description: 'Aplicación móvil para escanear códigos QR con historial y compartir funcionalidad.',
-    image: ecuScanImg,
-    technologies: ['Flutter', 'Dart', 'QR Scanner'],
-    githubLink: 'https://github.com/juanxcueva/ecuscan',
-    liveLink: null,
-    status: 'Completado'
-  },
-  {
-    id: 3,
-    title: 'Tres en Raya',
-    description: 'Juego clásico de Tres en Raya con modo multijugador local y contador de victorias.',
-    image: tresEnRayaImg,
-    technologies: ['React', 'JavaScript', 'CSS3'],
-    githubLink: 'https://github.com/juanxcueva/tres-en-raya',
-    liveLink: 'https://tres-en-raya-juanxcueva.vercel.app',
-    status: 'Completado'
-  },
-  {
-    id: 4,
-    title: 'Sistema de Entregas',
-    description: 'Sistema de gestión de entregas con tracking en tiempo real y notificaciones.',
-    image: entregasImg,
-    technologies: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
-    githubLink: 'https://github.com/juanxcueva/entregas',
-    liveLink: null,
-    status: 'En Desarrollo'
-  }
-];
+const getScreenshot = (folder, filename) => {
+  const key = `../assets/${folder}/${filename}`;
+  return screenshotModules[key]?.default || '';
+};
 
-const Projects = () => {
-  // ✅ Función para manejar clicks en proyectos
-  const handleProjectClick = (projectName, linkType, url) => {
-    if (url) {
-      logProjectClick(projectName, linkType); // 📊 Registrar en Analytics
-      window.open(url, '_blank', 'noopener,noreferrer');
-    }
+const folderMap = {
+  'SillónPOS': 'sillonpos',
+  'EcuaTresEnRaya': 'ecuatresenraya',
+  'Flappy 593': 'flappy593',
+  'EcuScanQR': 'scanqr',
+};
+
+/* ---- Phone Carousel Component ---- */
+const PhoneCarousel = ({ screenshots, folder, color }) => {
+  const [current, setCurrent] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const touchStart = useRef(0);
+  const total = screenshots.length;
+
+  const go = (dir) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrent((prev) => (prev + dir + total) % total);
+    setTimeout(() => setIsAnimating(false), 400);
+  };
+
+  const handleTouchStart = (e) => { touchStart.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e) => {
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) go(diff > 0 ? 1 : -1);
   };
 
   return (
-    <section className="projects-section">
-      <div className="container">
-        <h2 className="projects-main-title">Proyectos Destacados</h2>
-        
-        <div className="projects-grid">
-          {projectsData.map((project) => (
-            <div key={project.id} className="project-card">
-              <div className="project-image-wrapper">
-                {project.status && (
-                  <div className="project-status">
-                    {project.status}
-                  </div>
-                )}
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="project-image"
+    <div className="phone-carousel">
+      <div className="phone-carousel-track">
+        {screenshots.map((file, i) => {
+          const offset = i - current;
+          const isActive = offset === 0;
+          const isNear = Math.abs(offset) === 1;
+          const style = {
+            transform: `translateX(${offset * 85}%) scale(${isActive ? 1 : 0.78}) rotateY(${offset * -12}deg)`,
+            opacity: Math.abs(offset) > 2 ? 0 : isActive ? 1 : isNear ? 0.5 : 0.2,
+            zIndex: 10 - Math.abs(offset),
+            filter: isActive ? 'none' : 'brightness(0.5)',
+          };
+          return (
+            <div
+              className={`phone-mockup ${isActive ? 'active' : ''}`}
+              key={i}
+              style={style}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="phone-frame">
+                <div className="phone-notch" />
+                <img
+                  src={getScreenshot(folder, file)}
+                  alt={`Screenshot ${i + 1}`}
+                  className="phone-screen"
                   loading="lazy"
+                  draggable={false}
                 />
               </div>
-              
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">
-                  {project.description}
-                </p>
-                
-                <div className="project-tech">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">
-                      {tech}
-                    </span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="carousel-controls">
+        <button className="carousel-btn" onClick={() => go(-1)} aria-label="Anterior">
+          <FaChevronLeft />
+        </button>
+        <div className="carousel-dots">
+          {screenshots.map((_, i) => (
+            <button
+              key={i}
+              className={`carousel-dot ${i === current ? 'active' : ''}`}
+              onClick={() => { if (!isAnimating) { setIsAnimating(true); setCurrent(i); setTimeout(() => setIsAnimating(false), 400); } }}
+              style={i === current ? { background: color } : {}}
+              aria-label={`Ir a imagen ${i + 1}`}
+            />
+          ))}
+        </div>
+        <button className="carousel-btn" onClick={() => go(1)} aria-label="Siguiente">
+          <FaChevronRight />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+/* ---- Feature tag ---- */
+const FeatureTag = ({ text }) => (
+  <span className="feature-tag">{text}</span>
+);
+
+/* ---- Main Projects Component ---- */
+const Projects = () => {
+  const handleStoreClick = (project) => {
+    logEvent('Projects', 'store_click', project.title);
+  };
+
+  return (
+    <section id="projects" className="projects-section">
+      <div className="container">
+        <div className="section-header">
+          <span className="section-tag">Portafolio</span>
+          <h2 className="section-title">Mis <span className="gradient-text">Proyectos</span></h2>
+          <p className="section-desc">
+            Aplicaciones publicadas en Google Play Store, diseñadas con pasión y enfoque en la experiencia del usuario.
+          </p>
+        </div>
+
+        <div className="projects-showcase">
+          {projectsData.map((project, index) => (
+            <div
+              className={`project-showcase-card ${index % 2 !== 0 ? 'reversed' : ''}`}
+              key={project.id}
+            >
+              <div className="showcase-visual">
+                <div
+                  className="showcase-glow"
+                  style={{ background: `radial-gradient(ellipse at center, ${project.color}20 0%, transparent 70%)` }}
+                />
+                <PhoneCarousel
+                  screenshots={project.screenshots}
+                  folder={folderMap[project.title]}
+                  color={project.color}
+                />
+              </div>
+
+              <div className="showcase-info">
+                <div className="showcase-badges">
+                  <span className="showcase-platform">
+                    <FaGooglePlay /> Google Play
+                  </span>
+                  <span className="showcase-status" style={{ color: project.color, borderColor: `${project.color}40`, background: `${project.color}10` }}>
+                    {project.status}
+                  </span>
+                </div>
+
+                <h3 className="showcase-title">{project.title}</h3>
+                <p className="showcase-subtitle">{project.subtitle}</p>
+                <p className="showcase-description">{project.description}</p>
+
+                <div className="showcase-features">
+                  {project.features.map((feat, i) => (
+                    <FeatureTag key={i} text={feat} />
                   ))}
                 </div>
-                
-                <div className="project-links">
-                  {/* ✅ Click en GitHub rastreado */}
-                  <button 
-                    className="project-btn btn-secondary"
-                    onClick={() => handleProjectClick(project.title, 'GitHub', project.githubLink)}
-                  >
-                    <FaGithub size={18} />
-                    Código
-                  </button>
-                  
-                  {/* ✅ Click en Demo rastreado */}
-                  {project.liveLink && (
-                    <button 
-                      className="project-btn btn-primary"
-                      onClick={() => handleProjectClick(project.title, 'Live Demo', project.liveLink)}
-                    >
-                      <FaExternalLinkAlt size={16} />
-                      Ver Demo
-                    </button>
-                  )}
+
+                <div className="showcase-techs">
+                  {project.technologies.map((tech, i) => (
+                    <span className="showcase-tech" key={i}>{tech}</span>
+                  ))}
                 </div>
+
+                <a
+                  href={project.storeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="showcase-store-btn"
+                  onClick={() => handleStoreClick(project)}
+                  style={{ background: project.color }}
+                >
+                  <FaGooglePlay />
+                  <div>
+                    <span className="store-btn-small">Disponible en</span>
+                    <span className="store-btn-big">Google Play</span>
+                  </div>
+                </a>
               </div>
             </div>
           ))}
