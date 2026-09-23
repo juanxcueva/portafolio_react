@@ -1,22 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/useLanguage';
 import './About.css';
-
-const educationData = [
-  { institution: 'UCUENCA - Universidad de Cuenca', degree: 'Ingeniería en Sistemas', period: '2016 - 2023' },
-  { institution: 'Unidad Educativa Borja', degree: 'Bachiller en Ciencias', period: '2011 - 2016' },
-];
-
-const experienceData = [
-  { company: 'GAD Municipal de Chunchi', role: 'Network & Infrastructure Support / System Administrator', period: '2025 - Actualidad' },
-  { company: 'SystecnaSoft', role: 'Fullstack Developer Mobile', period: '2023 - 2025' },
-  { company: 'ICreativa', role: 'Mobile Developer', period: '2021 - 2022' },
-];
-
-const stats = [
-  { number: '3+', label: 'Años de experiencia' },
-  { number: '10+', label: 'Proyectos completados' },
-  { number: '15+', label: 'Tecnologías' },
-];
 
 const AnimatedNumber = ({ target }) => {
   const [count, setCount] = useState(0);
@@ -47,21 +31,26 @@ const AnimatedNumber = ({ target }) => {
 };
 
 const About = () => {
+  const { t } = useLanguage();
+  const education = t('about.education');
+  const experience = t('about.experience');
+  const aboutStats = t('about.stats');
+
   return (
     <section className="about-section" id="about">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">SOBRE MÍ</span>
+          <span className="section-tag">{t('about.tag')}</span>
           <h2 className="section-title">
-            Educación & <span className="gradient-text">Experiencia</span>
+            {t('about.titlePrefix')} <span className="gradient-text">{t('about.titleGradient')}</span>
           </h2>
           <p className="section-desc">
-            Mi trayectoria en tecnología, desde las aulas hasta proyectos reales.
+            {t('about.desc')}
           </p>
         </div>
 
         <div className="about-stats">
-          {stats.map((stat, index) => (
+          {aboutStats.map((stat, index) => (
             <div className="stat-item" key={index}>
               <span className="stat-number">
                 <AnimatedNumber target={stat.number} />
@@ -75,10 +64,10 @@ const About = () => {
           <div className="about-card card">
             <div className="about-card-header">
               <span className="about-card-icon">{String.fromCodePoint(0x1F393)}</span>
-              <h3>Educación</h3>
+              <h3>{t('about.educationTitle')}</h3>
             </div>
             <div className="about-timeline">
-              {educationData.map((item, index) => (
+              {education.map((item, index) => (
                 <div key={index} className="timeline-item">
                   <div className="timeline-dot" />
                   <div className="timeline-content">
@@ -94,10 +83,10 @@ const About = () => {
           <div className="about-card card">
             <div className="about-card-header">
               <span className="about-card-icon">{String.fromCodePoint(0x1F4BC)}</span>
-              <h3>Experiencia</h3>
+              <h3>{t('about.experienceTitle')}</h3>
             </div>
             <div className="about-timeline">
-              {experienceData.map((item, index) => (
+              {experience.map((item, index) => (
                 <div key={index} className="timeline-item">
                   <div className="timeline-dot" />
                   <div className="timeline-content">

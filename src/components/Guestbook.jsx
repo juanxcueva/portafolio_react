@@ -13,7 +13,6 @@ const Guestbook = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [adminMode, setAdminMode] = useState(false);
-  const [adminPassword, setAdminPassword] = useState('');
 
   // Cargar mensajes al montar el componente
   useEffect(() => {

@@ -1,0 +1,82 @@
+/* ===== APPLE DESIGN: ACCESSIBILITY & MATERIALS ===== */
+
+/* Typography: balance large headings like Apple's optical layout */
+.section-title,
+.showcase-title,
+.hero-name-line,
+.contact-info-heading,
+.footer-logo {
+  text-wrap: balance;
+}
+
+/* Visible focus rings for keyboard users */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Press feedback — respond on pointer-down, not on release */
+.hero-btn-primary:active,
+.showcase-store-btn:active,
+.form-submit:active,
+.carousel-btn:active,
+.footer-social-link:active,
+.scroll-to-top:active,
+.nav-link:active,
+.skill-chip:active,
+.feature-tag:active {
+  transform: scale(0.96);
+}
+.hero-btn-icon:active {
+  transform: scale(0.94);
+}
+
+/* Reduced motion: cross-fades and static transitions, no springs */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-left .marquee-content,
+  .marquee-right .marquee-content {
+    animation: none !important;
+  }
+  .particle {
+    animation: none !important;
+    opacity: 0;
+  }
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-fade {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Reduced transparency: solid surfaces, no blur */
+@media (prefers-reduced-transparency: reduce) {
+  .navbar-scrolled,
+  .card,
+  .contact-info-card,
+  .scroll-to-top,
+  .hero-btn-icon,
+  .phone-mockup {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--bg-secondary) !important;
+  }
+}

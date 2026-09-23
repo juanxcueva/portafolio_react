@@ -1,7 +1,9 @@
 import './styles/animations.css';
+import './styles/accessibility.css';
 import React, { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { initGA, logPageView, logDeviceInfo } from './utils/analytics';
+import { LanguageProvider } from './i18n/LanguageProvider';
 import './App.css';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
@@ -24,16 +26,18 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Navbar />
-      <Header />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-      <Footer />
-      <Analytics />
-    </div>
+    <LanguageProvider>
+      <div className="App">
+        <Navbar />
+        <Header />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+        <Analytics />
+      </div>
+    </LanguageProvider>
   );
 }
 

@@ -2,14 +2,28 @@
   {
     "id": 1,
     "title": "SillónPOS",
-    "subtitle": "Sistema Punto de Venta",
-    "description": "Sistema de punto de venta moderno y fácil de usar, diseñado para restaurantes y negocios de comida. Gestión de órdenes, edición de pedidos, pagos con Deuna QR, cálculos precisos y animaciones fluidas.",
-    "features": [
-      "Interfaz moderna e intuitiva",
-      "Gestión y edición de órdenes",
-      "Pago con Deuna QR",
-      "Cálculos de decimales precisos"
-    ],
+    "subtitle": {
+      "es": "Sistema Punto de Venta",
+      "en": "Point of Sale System"
+    },
+    "description": {
+      "es": "Sistema de punto de venta moderno y fácil de usar, diseñado para restaurantes y negocios de comida. Gestión de órdenes, edición de pedidos, pagos con Deuna QR, cálculos precisos y animaciones fluidas.",
+      "en": "A modern, easy-to-use point of sale system built for restaurants and food businesses. Order management, order editing, Deuna QR payments, precise calculations and fluid animations."
+    },
+    "features": {
+      "es": [
+        "Interfaz moderna e intuitiva",
+        "Gestión y edición de órdenes",
+        "Pago con Deuna QR",
+        "Cálculos de decimales precisos"
+      ],
+      "en": [
+        "Modern and intuitive interface",
+        "Order management and editing",
+        "Deuna QR payments",
+        "Precise decimal calculations"
+      ]
+    },
     "screenshots": [
       "sillon1.jpeg",
       "sillon2.jpeg",
@@ -25,7 +39,10 @@
       "Deuna API"
     ],
     "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.sillonpos",
-    "status": "Publicado",
+    "status": {
+      "es": "Publicado",
+      "en": "Published"
+    },
     "platform": "android",
     "featured": true,
     "color": "#FF6B35"
@@ -33,14 +50,28 @@
   {
     "id": 2,
     "title": "EcuaTresEnRaya",
-    "subtitle": "Juego Multijugador",
-    "description": "¡El clásico tres en raya más épico que nunca! Tres niveles de dificultad contra la IA, modo versus local, WiFi LAN, sistema de logros y experiencia inmersiva con vibración y efectos de sonido.",
-    "features": [
-      "3 niveles de dificultad IA",
-      "Modo WiFi multijugador",
-      "Sistema de logros",
-      "Estadísticas y progreso"
-    ],
+    "subtitle": {
+      "es": "Juego Multijugador",
+      "en": "Multiplayer Game"
+    },
+    "description": {
+      "es": "¡El clásico tres en raya más épico que nunca! Tres niveles de dificultad contra la IA, modo versus local, WiFi LAN, sistema de logros y experiencia inmersiva con vibración y efectos de sonido.",
+      "en": "The classic tic-tac-toe, bigger than ever! Three AI difficulty levels, local vs mode, WiFi LAN, an achievements system and an immersive experience with haptics and sound effects."
+    },
+    "features": {
+      "es": [
+        "3 niveles de dificultad IA",
+        "Modo WiFi multijugador",
+        "Sistema de logros",
+        "Estadísticas y progreso"
+      ],
+      "en": [
+        "3 AI difficulty levels",
+        "WiFi multiplayer mode",
+        "Achievements system",
+        "Stats and progress"
+      ]
+    },
     "screenshots": [
       "ecua1.jpeg",
       "ecua2.jpeg",
@@ -56,7 +87,10 @@
       "SQLite"
     ],
     "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.tictacecuador",
-    "status": "Publicado",
+    "status": {
+      "es": "Publicado",
+      "en": "Published"
+    },
     "platform": "android",
     "featured": true,
     "color": "#7C3AED"
@@ -64,14 +98,28 @@
   {
     "id": 3,
     "title": "Flappy 593",
-    "subtitle": "Juego Arcade Social",
-    "description": "El desafío clásico de volar ha vuelto y es más social que nunca. Supérate a ti mismo, desbloquea logros épicos, colecciona personajes únicos y compite con amigos.",
-    "features": [
-      "Personajes coleccionables",
-      "Logros épicos",
-      "Ranking social con amigos",
-      "Controles intuitivos"
-    ],
+    "subtitle": {
+      "es": "Juego Arcade Social",
+      "en": "Social Arcade Game"
+    },
+    "description": {
+      "es": "El desafío clásico de volar ha vuelto y es más social que nunca. Supérate a ti mismo, desbloquea logros épicos, colecciona personajes únicos y compite con amigos.",
+      "en": "The classic flying challenge is back, and more social than ever. Beat your own records, unlock epic achievements, collect unique characters and compete with friends."
+    },
+    "features": {
+      "es": [
+        "Personajes coleccionables",
+        "Logros épicos",
+        "Ranking social con amigos",
+        "Controles intuitivos"
+      ],
+      "en": [
+        "Collectible characters",
+        "Epic achievements",
+        "Social leaderboard with friends",
+        "Intuitive controls"
+      ]
+    },
     "screenshots": [
       "flappy1.jpeg",
       "flappy2.jpeg",
@@ -86,7 +134,10 @@
       "Firebase"
     ],
     "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.flappy593",
-    "status": "Publicado",
+    "status": {
+      "es": "Publicado",
+      "en": "Published"
+    },
     "platform": "android",
     "featured": false,
     "color": "#10B981"
@@ -94,14 +145,28 @@
   {
     "id": 4,
     "title": "EcuScanQR",
-    "subtitle": "Escáner de Códigos QR",
-    "description": "Crea y escanea códigos QR para sitios web, texto, email, Wi-Fi y más. Flash, cámara volteada, historial, favoritos, exportación de datos y modo oscuro.",
-    "features": [
-      "Escaneo con flash y cámara dual",
-      "Historial y favoritos",
-      "Crear QR personalizados",
-      "Modo oscuro"
-    ],
+    "subtitle": {
+      "es": "Escáner de Códigos QR",
+      "en": "QR Code Scanner"
+    },
+    "description": {
+      "es": "Crea y escanea códigos QR para sitios web, texto, email, Wi-Fi y más. Flash, cámara volteada, historial, favoritos, exportación de datos y modo oscuro.",
+      "en": "Create and scan QR codes for websites, text, email, Wi-Fi and more. Flash, camera flip, history, favorites, data export and dark mode."
+    },
+    "features": {
+      "es": [
+        "Escaneo con flash y cámara dual",
+        "Historial y favoritos",
+        "Crear QR personalizados",
+        "Modo oscuro"
+      ],
+      "en": [
+        "Scanning with flash and dual camera",
+        "History and favorites",
+        "Create custom QR codes",
+        "Dark mode"
+      ]
+    },
     "screenshots": [
       "scan1.jpeg",
       "scan2.jpeg",
@@ -118,7 +183,10 @@
       "QR Engine"
     ],
     "storeLink": "https://play.google.com/store/apps/details?id=com.juanxcueva.ecuscanqr&pli=1",
-    "status": "Publicado",
+    "status": {
+      "es": "Publicado",
+      "en": "Published"
+    },
     "platform": "android",
     "featured": false,
     "color": "#0EA5E9"

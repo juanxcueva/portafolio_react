@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useTypewriter } from '../hooks/useTypewriter';
+import { useLanguage } from '../i18n/useLanguage';
 import './Header.css';
 
 const Header = () => {
+  const { t, language } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const roles = [
-    'Fullstack Developer',
-    'Mobile Developer',
-    'React Enthusiast',
-    'Problem Solver'
-  ];
-
-  const { displayText } = useTypewriter(roles, 80, 40, 2500);
+  const roles = t('header.roles');
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -83,7 +78,7 @@ const Header = () => {
           opacity: Math.max(0, 1 - scrollY / 700),
         }}
       >
-        <span className="hero-badge">Disponible para trabajar</span>
+        <span className="hero-badge">{t('header.available')}</span>
 
         <h1 className="hero-name">
           <span className="hero-name-line hero-name-fade-1">Juan</span>
@@ -91,19 +86,18 @@ const Header = () => {
         </h1>
 
         <div className="hero-role">
-          <span className="hero-role-text">{displayText}</span>
-          <span className="hero-cursor">|</span>
+          <TypewriterRoles key={language} roles={roles} />
         </div>
 
         <p className="hero-desc">
-          Creando experiencias digitales que combinan
+          {t('header.descTop')}
           <br />
-          <strong>diseño, tecnología y creatividad.</strong>
+          <strong>{t('header.descStrong')}</strong>
         </p>
 
         <div className="hero-cta">
           <a href="#projects" className="hero-btn-primary">
-            Explorar proyectos
+            {t('header.cta')}
             <span className="btn-arrow">→</span>
           </a>
           <a
@@ -135,6 +129,16 @@ const Header = () => {
         <span className="hero-scroll-text">SCROLL</span>
       </div>
     </header>
+  );
+};
+
+const TypewriterRoles = ({ roles }) => {
+  const { displayText } = useTypewriter(roles, 80, 40, 2500);
+  return (
+    <>
+      <span className="hero-role-text">{displayText}</span>
+      <span className="hero-cursor">|</span>
+    </>
   );
 };
 

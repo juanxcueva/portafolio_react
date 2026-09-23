@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaInstagram, FaArrowUp } from 'react-icons/fa';
+import { useLanguage } from '../i18n/useLanguage';
 import './Footer.css';
 
 const socials = [
@@ -9,6 +10,7 @@ const socials = [
 ];
 
 const Footer = () => {
+  const { t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -19,7 +21,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <span className="footer-logo">JC.</span>
-            <p className="footer-tagline">Creando experiencias digitales</p>
+            <p className="footer-tagline">{t('footer.tagline')}</p>
           </div>
           <div className="footer-socials">
             {socials.map((social, i) => (
@@ -38,11 +40,11 @@ const Footer = () => {
         </div>
         <div className="footer-bottom">
           <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Juan Cueva. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Juan Cueva. {t('footer.rights')}
           </p>
         </div>
       </div>
-      <button className="scroll-to-top" onClick={scrollToTop} aria-label="Volver arriba">
+      <button className="scroll-to-top" onClick={scrollToTop} aria-label={t('footer.scrollTop')}>
         <FaArrowUp />
       </button>
     </footer>

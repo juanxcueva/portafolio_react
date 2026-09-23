@@ -1,8 +1,10 @@
 import React from 'react';
 import skillsData from '../data/skills.json';
+import { useLanguage } from '../i18n/useLanguage';
 import './Skills.css';
 
 const Skills = () => {
+  const { t } = useLanguage();
   const allSkills = skillsData.categories.flatMap(cat => cat.skills);
   const mid = Math.ceil(allSkills.length / 2);
   const row1 = allSkills.slice(0, mid);
@@ -27,8 +29,8 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="section-header">
-        <span className="section-tag">Habilidades</span>
-        <h2 className="section-title">Tecnologías que Domino</h2>
+        <span className="section-tag">{t('skills.tag')}</span>
+        <h2 className="section-title">{t('skills.title')}</h2>
       </div>
       <div className="marquee-container">
         <MarqueeRow skills={row1} direction="left" />

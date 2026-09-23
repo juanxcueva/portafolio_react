@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../i18n/useLanguage';
 import './Navbar.css';
 
 const Navbar = () => {
+    const { t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('header');
@@ -40,11 +43,11 @@ const Navbar = () => {
     };
 
     const navItems = [
-        { id: 'header', label: 'Inicio' },
-        { id: 'about', label: 'Sobre mí' },
-        { id: 'skills', label: 'Habilidades' },
-        { id: 'projects', label: 'Proyectos' },
-        { id: 'contact', label: 'Contacto' },
+        { id: 'header', label: t('nav.home') },
+        { id: 'about', label: t('nav.about') },
+        { id: 'skills', label: t('nav.skills') },
+        { id: 'projects', label: t('nav.projects') },
+        { id: 'contact', label: t('nav.contact') },
     ];
 
     return (
@@ -67,11 +70,13 @@ const Navbar = () => {
                         ))}
                         <div className="nav-theme-mobile">
                             <ThemeToggle />
+                            <LanguageToggle />
                         </div>
                     </div>
                     <div className="nav-actions">
                         <div className="nav-theme-desktop">
                             <ThemeToggle />
+                            <LanguageToggle />
                         </div>
                         <button
                             className={`nav-menu-btn ${isOpen ? 'active' : ''}`}

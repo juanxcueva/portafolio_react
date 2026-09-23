@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { FaGooglePlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { logEvent } from '../utils/analytics';
 import projectsData from '../data/projects.json';
+import { useLanguage } from '../i18n/useLanguage';
 import './Projects.css';
 
 /* ---- dynamic image imports from asset folders ---- */
@@ -21,6 +22,7 @@ const folderMap = {
 
 /* ---- Phone Carousel Component ---- */
 const PhoneCarousel = ({ screenshots, folder, color }) => {
+  const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const touchStart = useRef(0);
@@ -64,7 +66,7 @@ const PhoneCarousel = ({ screenshots, folder, color }) => {
                 <div className="phone-notch" />
                 <img
                   src={getScreenshot(folder, file)}
-                  alt={`Screenshot ${i + 1}`}
+                  alt={`${t('projects.screenshot')} ${i + 1}`}
                   className="phone-screen"
                   loading="lazy"
                   draggable={false}
@@ -76,7 +78,7 @@ const PhoneCarousel = ({ screenshots, folder, color }) => {
       </div>
 
       <div className="carousel-controls">
-        <button className="carousel-btn" onClick={() => go(-1)} aria-label="Anterior">
+        <button className="carousel-btn" onClick={() => go(-1)} aria-label={t('projects.prev')}>
           <FaChevronLeft />
         </button>
         <div className="carousel-dots">
@@ -86,11 +88,11 @@ const PhoneCarousel = ({ screenshots, folder, color }) => {
               className={`carousel-dot ${i === current ? 'active' : ''}`}
               onClick={() => { if (!isAnimating) { setIsAnimating(true); setCurrent(i); setTimeout(() => setIsAnimating(false), 400); } }}
               style={i === current ? { background: color } : {}}
-              aria-label={`Ir a imagen ${i + 1}`}
+              aria-label={`${t('projects.goTo')} ${i + 1}`}
             />
           ))}
         </div>
-        <button className="carousel-btn" onClick={() => go(1)} aria-label="Siguiente">
+        <button className="carousel-btn" onClick={() => go(1)} aria-label={t('projects.next')}>
           <FaChevronRight />
         </button>
       </div>
@@ -105,6 +107,7 @@ const FeatureTag = ({ text }) => (
 
 /* ---- Main Projects Component ---- */
 const Projects = () => {
+  const { t, language } = useLanguage();
   const handleStoreClick = (project) => {
     logEvent('Projects', 'store_click', project.title);
   };
@@ -113,10 +116,10 @@ const Projects = () => {
     <section id="projects" className="projects-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Portafolio</span>
-          <h2 className="section-title">Mis <span className="gradient-text">Proyectos</span></h2>
+          <span className="section-tag">{t('projects.tag')}</span>
+          <h2 className="section-title">{t('projects.titlePrefix')}<span className="gradient-text">{t('projects.titleGradient')}</span></h2>
           <p className="section-desc">
-            Aplicaciones publicadas en Google Play Store, diseñadas con pasión y enfoque en la experiencia del usuario.
+            {t('projects.desc')}
           </p>
         </div>
 
@@ -144,16 +147,16 @@ const Projects = () => {
                     <FaGooglePlay /> Google Play
                   </span>
                   <span className="showcase-status" style={{ color: project.color, borderColor: `${project.color}40`, background: `${project.color}10` }}>
-                    {project.status}
+                    {project.status[language]}
                   </span>
                 </div>
 
                 <h3 className="showcase-title">{project.title}</h3>
-                <p className="showcase-subtitle">{project.subtitle}</p>
-                <p className="showcase-description">{project.description}</p>
+                <p className="showcase-subtitle">{project.subtitle[language]}</p>
+                <p className="showcase-description">{project.description[language]}</p>
 
                 <div className="showcase-features">
-                  {project.features.map((feat, i) => (
+                  {project.features[language].map((feat, i) => (
                     <FeatureTag key={i} text={feat} />
                   ))}
                 </div>
@@ -174,7 +177,7 @@ const Projects = () => {
                 >
                   <FaGooglePlay />
                   <div>
-                    <span className="store-btn-small">Disponible en</span>
+                    <span className="store-btn-small">{t('projects.availableOn')}</span>
                     <span className="store-btn-big">Google Play</span>
                   </div>
                 </a>

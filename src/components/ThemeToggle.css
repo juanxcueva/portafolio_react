@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
 }
+.theme-toggle:active .toggle-track {
+  transform: scale(0.92);
+}
 .toggle-track {
   position: relative;
   width: 52px;

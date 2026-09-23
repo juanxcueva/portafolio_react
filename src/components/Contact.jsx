@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
 import { logEvent } from '../utils/analytics';
+import { useLanguage } from '../i18n/useLanguage';
 import './Contact.css';
 
-const contactInfo = [
-  { icon: FaMapMarkerAlt, label: 'Ubicación', value: 'Cuenca, Ecuador' },
-  { icon: FaPhone, label: 'Teléfono', value: '+593 987 392 542', href: 'tel:+593987392542' },
-  { icon: FaEnvelope, label: 'Correo', value: 'juanxcueva1@gmail.com', href: 'mailto:juanxcueva1@gmail.com' },
-];
-
 const Contact = () => {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
+
+  const contactInfo = [
+    { icon: FaMapMarkerAlt, label: t('contact.location'), value: 'Cuenca, Ecuador' },
+    { icon: FaPhone, label: t('contact.phone'), value: '+593 987 392 542', href: 'tel:+593987392542' },
+    { icon: FaEnvelope, label: t('contact.email'), value: 'juanxcueva1@gmail.com', href: 'mailto:juanxcueva1@gmail.com' },
+  ];
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -20,7 +22,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     logEvent('Contact', 'form_submit', formData.email);
-    const mailtoLink = `mailto:juanxcueva1@gmail.com?subject=Contacto Portafolio de ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message + '\n\nDe: ' + formData.name + '\nEmail: ' + formData.email)}`;
+    const mailtoLink = `mailto:juanxcueva1@gmail.com?subject=${encodeURIComponent(t('contact.mailSubject') + formData.name)}&body=${encodeURIComponent(formData.message + '\n\n' + (language === 'es' ? 'De: ' : 'From: ') + formData.name + '\nEmail: ' + formData.email)}`;
     window.open(mailtoLink, '_blank');
     setStatus('sent');
     setTimeout(() => setStatus(null), 3000);
@@ -30,14 +32,14 @@ const Contact = () => {
     <section id="contact" className="contact-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Contacto</span>
-          <h2 className="section-title">Trabajemos Juntos</h2>
+          <span className="section-tag">{t('contact.tag')}</span>
+          <h2 className="section-title">{t('contact.title')}</h2>
         </div>
         <div className="contact-grid">
           <div className="contact-info-card">
-            <h3 className="contact-info-heading">Contáctame</h3>
+            <h3 className="contact-info-heading">{t('contact.heading')}</h3>
             <p className="contact-info-text">
-              Siempre estoy abierto a nuevas oportunidades y proyectos interesantes. ¡No dudes en escribirme!
+              {t('contact.text')}
             </p>
             <div className="contact-info-list">
               {contactInfo.map((item, i) => (
@@ -65,7 +67,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Tu Nombre"
+                placeholder={t('contact.name')}
                 className="form-input"
               />
             </div>
@@ -76,7 +78,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="Tu Email"
+                placeholder={t('contact.emailPlaceholder')}
                 className="form-input"
               />
             </div>
@@ -86,14 +88,14 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                placeholder="Tu Mensaje"
+                placeholder={t('contact.message')}
                 rows="5"
                 className="form-input form-textarea"
               />
             </div>
             <button type="submit" className="form-submit">
               <FaPaperPlane />
-              {status === 'sent' ? '¡Mensaje Enviado!' : 'Enviar Mensaje'}
+              {status === 'sent' ? t('contact.sent') : t('contact.submit')}
             </button>
           </form>
         </div>
