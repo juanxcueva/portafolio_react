@@ -2,64 +2,65 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  border-radius: 16px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.language-toggle:active .language-track {
+  transform: scale(0.92);
 }
 .language-track {
   position: relative;
-  width: 62px;
+  width: 64px;
   height: 28px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 8px;
+  align-items: stretch;
+  overflow: hidden;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 .language-track.light {
   background: rgba(0, 0, 0, 0.06);
   border-color: rgba(0, 0, 0, 0.1);
 }
-.language-globe {
-  position: absolute;
-  left: -38px;
-  font-size: 13px;
-  color: var(--text-muted);
-  z-index: 2;
-  transition: color 0.3s ease;
-}
-.language-toggle:hover .language-globe {
-  color: var(--accent-color);
-}
 .language-slider {
   position: absolute;
   top: 2px;
-  width: 26px;
+  left: 2px;
+  width: 30px;
   height: 22px;
   background: var(--text-color);
   border-radius: 11px;
   transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.4, 1);
+  will-change: transform;
 }
 .language-track.light .language-slider {
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 .language-track.en .language-slider {
-  transform: translateX(34px);
+  transform: translateX(30px);
 }
 .language-option {
   position: relative;
   z-index: 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--text-muted);
   transition: color 0.3s ease;
   user-select: none;
+  pointer-events: none;
 }
 .language-option.active {
   color: var(--bg-primary);
@@ -68,8 +69,7 @@
   color: #fff;
 }
 
-.language-toggle:focus-visible,
-.theme-toggle:focus-visible {
+.language-toggle:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
   border-radius: 14px;

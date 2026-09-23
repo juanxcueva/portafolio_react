@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
 import { logEvent } from '../utils/analytics';
 import { useLanguage } from '../i18n/useLanguage';
+import Reveal from './Reveal';
 import './Contact.css';
 
 const Contact = () => {
@@ -32,72 +33,78 @@ const Contact = () => {
     <section id="contact" className="contact-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">{t('contact.tag')}</span>
-          <h2 className="section-title">{t('contact.title')}</h2>
+          <Reveal direction="up">
+            <span className="section-tag">{t('contact.tag')}</span>
+            <h2 className="section-title">{t('contact.title')}</h2>
+          </Reveal>
         </div>
         <div className="contact-grid">
-          <div className="contact-info-card">
-            <h3 className="contact-info-heading">{t('contact.heading')}</h3>
-            <p className="contact-info-text">
-              {t('contact.text')}
-            </p>
-            <div className="contact-info-list">
-              {contactInfo.map((item, i) => (
-                <div className="contact-info-item" key={i}>
-                  <div className="contact-info-icon">
-                    <item.icon />
-                  </div>
-                  <div>
-                    <span className="contact-info-label">{item.label}</span>
-                    {item.href ? (
-                      <a href={item.href} className="contact-info-value link">{item.value}</a>
-                    ) : (
-                      <span className="contact-info-value">{item.value}</span>
-                    )}
+          <Reveal direction="left" delay={1}>
+            <div className="contact-info-card">
+              <h3 className="contact-info-heading">{t('contact.heading')}</h3>
+              <p className="contact-info-text">
+                {t('contact.text')}
+              </p>
+              <div className="contact-info-list">
+                {contactInfo.map((item, i) => (
+                  <div className="contact-info-item" key={i}>
+                    <div className="contact-info-icon">
+                      <item.icon />
+                    </div>
+                    <div>
+                      <span className="contact-info-label">{item.label}</span>
+                      {item.href ? (
+                        <a href={item.href} className="contact-info-value link">{item.value}</a>
+                      ) : (
+                        <span className="contact-info-value">{item.value}</span>
+                      )}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.name')}
-                className="form-input"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.emailPlaceholder')}
-                className="form-input"
-              />
-            </div>
-            <div className="form-group">
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.message')}
-                rows="5"
-                className="form-input form-textarea"
-              />
-            </div>
-            <button type="submit" className="form-submit">
-              <FaPaperPlane />
-              {status === 'sent' ? t('contact.sent') : t('contact.submit')}
-            </button>
-          </form>
+          </Reveal>
+          <Reveal direction="right" delay={2}>
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder={t('contact.name')}
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder={t('contact.emailPlaceholder')}
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder={t('contact.message')}
+                  rows="5"
+                  className="form-input form-textarea"
+                />
+              </div>
+              <button type="submit" className="form-submit">
+                <FaPaperPlane />
+                {status === 'sent' ? t('contact.sent') : t('contact.submit')}
+              </button>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>

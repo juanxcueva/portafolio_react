@@ -1,6 +1,7 @@
 import React from 'react';
 import skillsData from '../data/skills.json';
 import { useLanguage } from '../i18n/useLanguage';
+import Reveal from './Reveal';
 import './Skills.css';
 
 const Skills = () => {
@@ -29,13 +30,17 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="section-header">
-        <span className="section-tag">{t('skills.tag')}</span>
-        <h2 className="section-title">{t('skills.title')}</h2>
+        <Reveal direction="up">
+          <span className="section-tag">{t('skills.tag')}</span>
+          <h2 className="section-title">{t('skills.title')}</h2>
+        </Reveal>
       </div>
-      <div className="marquee-container">
-        <MarqueeRow skills={row1} direction="left" />
-        <MarqueeRow skills={row2} direction="right" />
-      </div>
+      <Reveal direction="up" delay={1}>
+        <div className="marquee-container">
+          <MarqueeRow skills={row1} direction="left" />
+          <MarqueeRow skills={row2} direction="right" />
+        </div>
+      </Reveal>
     </section>
   );
 };

@@ -3,6 +3,7 @@ import { FaGooglePlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { logEvent } from '../utils/analytics';
 import projectsData from '../data/projects.json';
 import { useLanguage } from '../i18n/useLanguage';
+import Reveal from './Reveal';
 import './Projects.css';
 
 /* ---- dynamic image imports from asset folders ---- */
@@ -116,19 +117,25 @@ const Projects = () => {
     <section id="projects" className="projects-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">{t('projects.tag')}</span>
-          <h2 className="section-title">{t('projects.titlePrefix')}<span className="gradient-text">{t('projects.titleGradient')}</span></h2>
-          <p className="section-desc">
-            {t('projects.desc')}
-          </p>
+          <Reveal direction="up">
+            <span className="section-tag">{t('projects.tag')}</span>
+            <h2 className="section-title">{t('projects.titlePrefix')}<span className="gradient-text">{t('projects.titleGradient')}</span></h2>
+            <p className="section-desc">
+              {t('projects.desc')}
+            </p>
+          </Reveal>
         </div>
 
         <div className="projects-showcase">
           {projectsData.map((project, index) => (
-            <div
-              className={`project-showcase-card ${index % 2 !== 0 ? 'reversed' : ''}`}
+            <Reveal
               key={project.id}
+              direction={index % 2 !== 0 ? 'left' : 'right'}
+              delay={index % 2 !== 0 ? 2 : 1}
             >
+              <div
+                className={`project-showcase-card ${index % 2 !== 0 ? 'reversed' : ''}`}
+              >
               <div className="showcase-visual">
                 <div
                   className="showcase-glow"
@@ -183,6 +190,7 @@ const Projects = () => {
                 </a>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

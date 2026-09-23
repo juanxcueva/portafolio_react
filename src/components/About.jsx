@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/useLanguage';
+import Reveal from './Reveal';
 import './About.css';
 
 const AnimatedNumber = ({ target }) => {
@@ -40,64 +41,72 @@ const About = () => {
     <section className="about-section" id="about">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">{t('about.tag')}</span>
-          <h2 className="section-title">
-            {t('about.titlePrefix')} <span className="gradient-text">{t('about.titleGradient')}</span>
-          </h2>
-          <p className="section-desc">
-            {t('about.desc')}
-          </p>
+          <Reveal direction="up">
+            <span className="section-tag">{t('about.tag')}</span>
+            <h2 className="section-title">
+              {t('about.titlePrefix')} <span className="gradient-text">{t('about.titleGradient')}</span>
+            </h2>
+            <p className="section-desc">
+              {t('about.desc')}
+            </p>
+          </Reveal>
         </div>
 
-        <div className="about-stats">
-          {aboutStats.map((stat, index) => (
-            <div className="stat-item" key={index}>
-              <span className="stat-number">
-                <AnimatedNumber target={stat.number} />
-              </span>
-              <span className="stat-label">{stat.label}</span>
-            </div>
-          ))}
-        </div>
+        <Reveal direction="scale" delay={1}>
+          <div className="about-stats">
+            {aboutStats.map((stat, index) => (
+              <div className="stat-item" key={index}>
+                <span className="stat-number">
+                  <AnimatedNumber target={stat.number} />
+                </span>
+                <span className="stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
 
         <div className="about-grid">
-          <div className="about-card card">
-            <div className="about-card-header">
-              <span className="about-card-icon">{String.fromCodePoint(0x1F393)}</span>
-              <h3>{t('about.educationTitle')}</h3>
-            </div>
-            <div className="about-timeline">
-              {education.map((item, index) => (
-                <div key={index} className="timeline-item">
-                  <div className="timeline-dot" />
-                  <div className="timeline-content">
-                    <h4>{item.institution}</h4>
-                    <p className="timeline-role">{item.degree}</p>
-                    <span className="timeline-period">{item.period}</span>
+          <Reveal direction="left" delay={1}>
+            <div className="about-card card">
+              <div className="about-card-header">
+                <span className="about-card-icon">{String.fromCodePoint(0x1F393)}</span>
+                <h3>{t('about.educationTitle')}</h3>
+              </div>
+              <div className="about-timeline">
+                {education.map((item, index) => (
+                  <div key={index} className="timeline-item">
+                    <div className="timeline-dot" />
+                    <div className="timeline-content">
+                      <h4>{item.institution}</h4>
+                      <p className="timeline-role">{item.degree}</p>
+                      <span className="timeline-period">{item.period}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="about-card card">
-            <div className="about-card-header">
-              <span className="about-card-icon">{String.fromCodePoint(0x1F4BC)}</span>
-              <h3>{t('about.experienceTitle')}</h3>
-            </div>
-            <div className="about-timeline">
-              {experience.map((item, index) => (
-                <div key={index} className="timeline-item">
-                  <div className="timeline-dot" />
-                  <div className="timeline-content">
-                    <h4>{item.company}</h4>
-                    <p className="timeline-role">{item.role}</p>
-                    <span className="timeline-period">{item.period}</span>
+          <Reveal direction="right" delay={2}>
+            <div className="about-card card">
+              <div className="about-card-header">
+                <span className="about-card-icon">{String.fromCodePoint(0x1F4BC)}</span>
+                <h3>{t('about.experienceTitle')}</h3>
+              </div>
+              <div className="about-timeline">
+                {experience.map((item, index) => (
+                  <div key={index} className="timeline-item">
+                    <div className="timeline-dot" />
+                    <div className="timeline-content">
+                      <h4>{item.company}</h4>
+                      <p className="timeline-role">{item.role}</p>
+                      <span className="timeline-period">{item.period}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
